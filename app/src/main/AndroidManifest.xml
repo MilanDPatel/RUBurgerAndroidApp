@@ -51,6 +51,16 @@
             </intent-filter>
         </activity>
 
+
+        <!-- Add this inside the <application> tag in your AndroidManifest.xml -->
+        <activity
+            android:name=".SizesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
     </application>
 
 </manifest>

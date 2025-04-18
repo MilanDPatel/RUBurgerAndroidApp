@@ -1,47 +1,38 @@
+
 package com.example.recycleapplication;
 
-/**
- * This class defines the data structure of an item to be displayed in the RecyclerView
- * @author Lily Chang
- */
 public class Item {
-	private String itemName;
-	private int image;
-	private String unitPrice; //for demo purpose, the unitPrice is of String type
+	private String name;
+	private int imageResourceId;
+	private double price;
+	private String priceString;
 
-	/**
-	 * Parameterized constructor.
-	 * @param itemName
-	 * @param image
-	 * @param unitPrice
-	 */
-	public Item(String itemName, int image, String unitPrice) {
-		this.itemName = itemName;
-		this.image = image;
-		this.unitPrice = unitPrice;
+	public Item(String name, int imageResourceId, String priceString) {
+		this.name = name;
+		this.imageResourceId = imageResourceId;
+		this.priceString = priceString;
+
+		// Parse the price string to get a double value
+		try {
+			this.price = Double.parseDouble(priceString.replace("$", "").trim());
+		} catch (NumberFormatException e) {
+			this.price = 2.99; // Default price if parsing fails
+		}
 	}
 
-	/**
-	 * Getter method that returns the item name of an item.
-	 * @return the item name of an item.
-	 */
-	public String getItemName() {
-		return itemName;
+	public String getName() {
+		return name;
 	}
 
-	/**
-	 * Getter method that returns the image of an item.
-	 * @return the image of an item.
-	 */
-	public int getImage() {
-		return image;
+	public int getImageResourceId() {
+		return imageResourceId;
 	}
 
-	/**
-	 * Getter method that returns the unit price.
-	 * @return the unit price of the item.
-	 */
-	public String getUnitPrice() {
-		return unitPrice;
+	public String getPriceString() {
+		return priceString;
+	}
+
+	public double getPrice() {
+		return price;
 	}
 }
