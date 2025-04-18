@@ -4,9 +4,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/apple"
+        android:icon="@drawable/appleslices"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/apple"
+        android:roundIcon="@drawable/appleslices"
         android:supportsRtl="true"
         android:theme="@style/Theme.RecyclerViewSampleCode">
 

@@ -18,9 +18,10 @@ public class SidesActivity extends AppCompatActivity {
 
     // Make sure these drawable resources exist in your res/drawable folder
     private int[] sideImages = {
-            R.drawable.banana,
-            R.drawable.grapes,
-            R.drawable.mango
+            R.drawable.fries,
+            R.drawable.chips,
+            R.drawable.appleslices,
+            R.drawable.onionring
     };
 
     @Override

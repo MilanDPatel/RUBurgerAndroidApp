@@ -21,9 +21,10 @@ public class MainActivity extends AppCompatActivity {
      *  ID is consistent with the index of the associated menu item in the ArrayList.
      *  An image resource could also be an URI.
      */
-    private int [] itemImages = {R.drawable.apple, R.drawable.banana, R.drawable.grapes,
-            R.drawable.mango, R.drawable.orange, R.drawable.peach, R.drawable.pineapple,
-            R.drawable.strawberry};
+    private int [] itemImages = {R.drawable.cola, R.drawable.tea, R.drawable.juice,
+            R.drawable.lemonade, R.drawable.orangejuice, R.drawable.sprite, R.drawable.rootbeer,
+            R.drawable.icedtea, R.drawable.coffee, R.drawable.hotchocolate, R.drawable.strawberry, R.drawable.grape,
+            R.drawable.cherry, R.drawable.vanilla, R.drawable.chocolate};
 
     /**
      * Get the references of all instances of Views defined in the layout file, set up the list of
