@@ -61,6 +61,16 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
+        Button viewOrderButton = findViewById(R.id.btn_view_order);
+        viewOrderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainMenuActivity.this, CurrentOrderActivity.class);
+                intent.putExtra("order", currentOrder);
+                startActivity(intent);
+            }
+        });
+
 
     }
 }
