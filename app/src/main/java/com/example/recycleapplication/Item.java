@@ -16,7 +16,7 @@ public class Item {
 		try {
 			this.price = Double.parseDouble(priceString.replace("$", "").trim());
 		} catch (NumberFormatException e) {
-			this.price = 2.99; // Default price if parsing fails
+			this.price = 0; // Default price if parsing fails
 		}
 	}
 

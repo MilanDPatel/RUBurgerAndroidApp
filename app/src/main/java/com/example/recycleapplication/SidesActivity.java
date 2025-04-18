@@ -60,6 +60,8 @@ public class SidesActivity extends AppCompatActivity {
     private boolean setupSideItems() {
         try {
             String[] sideNames = getResources().getStringArray(R.array.sideNames);
+            String[] sidePrices = getResources().getStringArray(R.array.sidePrices);
+
             if (sideNames.length == 0) {
                 Log.e(TAG, "sideNames array is empty");
                 return false;
@@ -68,10 +70,10 @@ public class SidesActivity extends AppCompatActivity {
             Log.d(TAG, "sideNames length: " + sideNames.length + ", sideImages length: " + sideImages.length);
 
             int count = Math.min(sideNames.length, sideImages.length);
+            count = Math.min(count, sidePrices.length);
+
             for (int i = 0; i < count; i++) {
-                // Instead of directly passing the resource ID, we'll create a version of the Item class
-                // that accepts a scaled-down version of the image resource ID
-                sideItems.add(new Item(sideNames[i], sideImages[i], "$2.99"));
+                sideItems.add(new Item(sideNames[i], sideImages[i], sidePrices[i]));
             }
             return true;
         } catch (Exception e) {

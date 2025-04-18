@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
          * data sources.
          */
         for (int i = 0; i < itemNames.length; i++) {
-            items.add(new Item(itemNames[i], itemImages[i], "$1.39"));
+            items.add(new Item(itemNames[i], itemImages[i], "$1.99"));
         }
     }
 }

@@ -23,6 +23,23 @@
         <item>Apple Slices</item>
         <item>Onion Rings</item>
     </string-array>
+
+    <string-array name="sidePrices">
+        <item>$2.49</item>
+        <item>$1.99</item>
+        <item>$1.29</item>
+        <item>$3.29</item>
+    </string-array>
+
+    <!-- Size Adjustments -->
+    <string name="medium_price_adjustment">0.50</string>
+    <string name="large_price_adjustment">1.00</string>
+
+    <!-- Size Options -->
+    <string name="size_small">Small</string>
+    <string name="size_medium">Medium</string>
+    <string name="size_large">Large</string>
+
     <string-array name="quantity">
         <item>1</item>
         <item>2</item>

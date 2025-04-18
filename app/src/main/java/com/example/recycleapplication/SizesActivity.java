@@ -20,8 +20,8 @@ public class SizesActivity extends AppCompatActivity {
     private TextView quantityText;
     private TextView totalPriceText;
     private int quantity = 1;
-    private double basePrice = 2.99;
-    private double currentPrice = 2.99;
+    private double basePrice = 1.99;
+    private double currentPrice = 1.99;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,17 +39,17 @@ public class SizesActivity extends AppCompatActivity {
         Button addToCartButton = findViewById(R.id.add_to_cart_button);
 
         // Get data from intent
+        // Get data from intent
         String itemName = getIntent().getStringExtra("item_name");
         int imageResId = getIntent().getIntExtra("image_res_id", 0);
-        basePrice = getIntent().getDoubleExtra("base_price", 2.99);
+        basePrice = getIntent().getDoubleExtra("base_price", 1.99);
         currentPrice = basePrice;
 
-        // Set initial values
-        itemNameText.setText(itemName);
-        itemImageView.setImageResource(imageResId);
-        updateTotalPrice();
+// Get price adjustments from resources
+        float mediumAdjustment = Float.parseFloat(getResources().getString(R.string.medium_price_adjustment));
+        float largeAdjustment = Float.parseFloat(getResources().getString(R.string.large_price_adjustment));
 
-        // Set up radio group listener
+// Set up radio group listener
         sizeRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             RadioButton selectedRadioButton = findViewById(checkedId);
             if (selectedRadioButton != null) {
@@ -59,10 +59,10 @@ public class SizesActivity extends AppCompatActivity {
                         currentPrice = basePrice;
                         break;
                     case "Medium":
-                        currentPrice = basePrice * 1.5;
+                        currentPrice = basePrice + mediumAdjustment;
                         break;
                     case "Large":
-                        currentPrice = basePrice * 2;
+                        currentPrice = basePrice + largeAdjustment;
                         break;
                 }
                 updateTotalPrice();
