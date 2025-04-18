@@ -22,6 +22,10 @@
             android:name=".MainActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".BeveragesActivity"
+            android:exported="false" />
+
         <!-- Activity showing sides RecyclerView -->
         <activity
             android:name=".SidesActivity"

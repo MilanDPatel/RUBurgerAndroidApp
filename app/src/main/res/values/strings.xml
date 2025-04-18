@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">RecyclerView Sample Code</string>
-    <string-array name="itemNames">
+    <string-array name="beverageNames">
         <item>Cola</item>
         <item>Tea</item>
         <item>Juice</item>
@@ -17,6 +17,25 @@
         <item>Vanilla</item>
         <item>Chocolate</item>
     </string-array>
+
+    <string-array name="beveragePrices">
+        <item>$1.99</item>
+        <item>$1.99</item>
+        <item>$1.99</item>
+        <item>$1.99</item>
+        <item>$1.99</item>
+        <item>$1.99</item>
+        <item>$1.99</item>
+        <item>$1.99</item>
+        <item>$1.99</item>
+        <item>$1.99</item>
+        <item>$1.99</item>
+        <item>$1.99</item>
+        <item>$1.99</item>
+        <item>$1.99</item>
+        <item>$1.99</item>
+    </string-array>
+
     <string-array name="sideNames">
         <item>Fries</item>
         <item>Chips</item>

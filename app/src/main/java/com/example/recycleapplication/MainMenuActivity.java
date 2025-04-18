@@ -21,12 +21,11 @@ public class MainMenuActivity extends AppCompatActivity {
         currentOrder = new Order();
 
         // Drinks button
-        Button drinksButton = findViewById(R.id.btn_drinks);
+        Button drinksButton = findViewById(R.id.btn_drinks); // Use your actual button ID
         drinksButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navigate to MainActivity where RecyclerView is shown
-                Intent intent = new Intent(MainMenuActivity.this, MainActivity.class);
+                Intent intent = new Intent(MainMenuActivity.this, BeveragesActivity.class);
                 startActivity(intent);
             }
         });
