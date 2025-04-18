@@ -1,8 +1,6 @@
 package com.example.recycleapplication;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -39,17 +37,25 @@ public class SizesActivity extends AppCompatActivity {
         Button addToCartButton = findViewById(R.id.add_to_cart_button);
 
         // Get data from intent
-        // Get data from intent
         String itemName = getIntent().getStringExtra("item_name");
         int imageResId = getIntent().getIntExtra("image_res_id", 0);
         basePrice = getIntent().getDoubleExtra("base_price", 1.99);
         currentPrice = basePrice;
 
-// Get price adjustments from resources
+        // Set initial price
+        updateTotalPrice();
+
+        // Get price adjustments from resources
         float mediumAdjustment = Float.parseFloat(getResources().getString(R.string.medium_price_adjustment));
         float largeAdjustment = Float.parseFloat(getResources().getString(R.string.large_price_adjustment));
 
-// Set up radio group listener
+        // Set initial item name and image
+        itemNameText.setText(itemName);
+        if (imageResId != 0) {
+            itemImageView.setImageResource(imageResId);
+        }
+
+        // Set up radio group listener
         sizeRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             RadioButton selectedRadioButton = findViewById(checkedId);
             if (selectedRadioButton != null) {
@@ -65,7 +71,7 @@ public class SizesActivity extends AppCompatActivity {
                         currentPrice = basePrice + largeAdjustment;
                         break;
                 }
-                updateTotalPrice();
+                updateTotalPrice(); // Update price when size changes
             }
         });
 
@@ -74,14 +80,14 @@ public class SizesActivity extends AppCompatActivity {
             if (quantity > 1) {
                 quantity--;
                 quantityText.setText(String.valueOf(quantity));
-                updateTotalPrice();
+                updateTotalPrice(); // Update price when quantity decreases
             }
         });
 
         plusButton.setOnClickListener(v -> {
             quantity++;
             quantityText.setText(String.valueOf(quantity));
-            updateTotalPrice();
+            updateTotalPrice(); // Update price when quantity increases
         });
 
         // Set up add to cart button
@@ -96,12 +102,11 @@ public class SizesActivity extends AppCompatActivity {
             // For now, we'll just finish the activity
             finish();
         });
-
     }
 
+    // Method to update the total price based on quantity and size
     private void updateTotalPrice() {
         double total = currentPrice * quantity;
-        totalPriceText.setText(String.format("$%.2f", total));
+        totalPriceText.setText(String.format("$%.2f", total)); // Update price on UI
     }
 }
-

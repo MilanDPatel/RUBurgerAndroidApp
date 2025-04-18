@@ -36,6 +36,8 @@ public class BeveragesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
         try {
             setContentView(R.layout.activity_beverages);
 
