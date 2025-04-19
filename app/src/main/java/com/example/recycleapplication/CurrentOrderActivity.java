@@ -12,6 +12,8 @@ import com.example.recycleapplication.model.Item;
 import com.example.recycleapplication.model.Order;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CurrentOrderActivity extends AppCompatActivity {
     private ListView orderListView;
@@ -33,6 +35,13 @@ public class CurrentOrderActivity extends AppCompatActivity {
             currentOrder = (Order) getIntent().getSerializableExtra("order");
         }
 
+        List<String> items = new ArrayList<>(); //Test list, remove later.
+        items.add("Item 1");
+        items.add("Item 2");
+        items.add("Item 3");
+        items.add("Item 4");
+        items.add("Item 5");
+
         orderListView = findViewById(R.id.orderListView);
         removeSelectedButton = findViewById(R.id.removeSelectedButton);
         placeOrderButton = findViewById(R.id.btnPlaceOrder);
@@ -45,6 +54,10 @@ public class CurrentOrderActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_single_choice,
                 currentOrder.getStringItems());
 
+//        adapter = new ArrayAdapter<>(this,
+//                android.R.layout.simple_list_item_single_choice,
+//                items);
+
         orderListView.setAdapter(adapter);
 
         updateTotals();
@@ -53,6 +66,8 @@ public class CurrentOrderActivity extends AppCompatActivity {
             int pos = orderListView.getCheckedItemPosition();
             if (pos != ListView.INVALID_POSITION) {
                 currentOrder.removeItem(pos);
+                currentOrder.getStringItems().remove(pos);
+//                items.remove(pos); //Remove later.
                 adapter.notifyDataSetChanged();
                 orderListView.clearChoices();
                 updateTotals();
@@ -63,6 +78,7 @@ public class CurrentOrderActivity extends AppCompatActivity {
         placeOrderButton.setOnClickListener(v -> {
             if (!currentOrder.getItems().isEmpty()) {
                 currentOrder.clear();
+                currentOrder.getStringItems().clear();
                 adapter.notifyDataSetChanged();
                 orderListView.clearChoices();
                 updateTotals();
