@@ -22,15 +22,7 @@ public class Order implements Serializable {
             items.remove(index);
         }
     }
-
     public void clear() {
         items.clear();
-    }
-    public List<String> getStringItems() {
-        List<String> itemStrings = new ArrayList<>();
-        for (Item item: items) {
-            itemStrings.add(item.toString());
-        }
-        return itemStrings;
     }
 }

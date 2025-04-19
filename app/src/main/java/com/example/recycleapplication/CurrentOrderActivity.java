@@ -1,6 +1,7 @@
 package com.example.recycleapplication;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -8,8 +9,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.recycleapplication.model.Burger;
 import com.example.recycleapplication.model.Item;
 import com.example.recycleapplication.model.Order;
+import com.example.recycleapplication.model.Sandwich;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -20,7 +23,7 @@ public class CurrentOrderActivity extends AppCompatActivity {
     private Button removeSelectedButton, placeOrderButton;
     private TextView subtotalText, taxText, totalText;
 
-    private ArrayAdapter<String> adapter;
+    private ArrayAdapter<Item> adapter;
     private Order currentOrder;
 
     private final double TAX_RATE = 0.06625;
@@ -33,14 +36,16 @@ public class CurrentOrderActivity extends AppCompatActivity {
 
         if (getIntent().getSerializableExtra("order") != null) {
             currentOrder = (Order) getIntent().getSerializableExtra("order");
+            Log.d("CurrentOrderActivity", "Not null. Received order with " + currentOrder.getItems().size() + " items");
+            for (Item item : currentOrder.getItems()) {
+                Log.d("CurrentOrderActivity", "Item: " + item.toString());
+            }
         }
 
-        List<String> items = new ArrayList<>(); //Test list, remove later.
-        items.add("Item 1");
-        items.add("Item 2");
-        items.add("Item 3");
-        items.add("Item 4");
-        items.add("Item 5");
+//        List<Item> items = new ArrayList<>(); //Test list, remove later.
+//        items.add(new Burger());
+//        items.add(new Sandwich());
+
 
         orderListView = findViewById(R.id.orderListView);
         removeSelectedButton = findViewById(R.id.removeSelectedButton);
@@ -52,11 +57,16 @@ public class CurrentOrderActivity extends AppCompatActivity {
 
         adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_single_choice,
-                currentOrder.getStringItems());
+                currentOrder.getItems());
 
 //        adapter = new ArrayAdapter<>(this,
 //                android.R.layout.simple_list_item_single_choice,
 //                items);
+
+        Log.d("AdapterDebug", "Adapter count: " + adapter.getCount());
+        for (int i = 0; i < adapter.getCount(); i++) {
+            Log.d("AdapterDebug", "Item at " + i + ": " + adapter.getItem(i));
+        }
 
         orderListView.setAdapter(adapter);
 
@@ -66,7 +76,6 @@ public class CurrentOrderActivity extends AppCompatActivity {
             int pos = orderListView.getCheckedItemPosition();
             if (pos != ListView.INVALID_POSITION) {
                 currentOrder.removeItem(pos);
-                currentOrder.getStringItems().remove(pos);
 //                items.remove(pos); //Remove later.
                 adapter.notifyDataSetChanged();
                 orderListView.clearChoices();
@@ -78,7 +87,6 @@ public class CurrentOrderActivity extends AppCompatActivity {
         placeOrderButton.setOnClickListener(v -> {
             if (!currentOrder.getItems().isEmpty()) {
                 currentOrder.clear();
-                currentOrder.getStringItems().clear();
                 adapter.notifyDataSetChanged();
                 orderListView.clearChoices();
                 updateTotals();
