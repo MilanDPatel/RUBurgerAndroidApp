@@ -3,7 +3,9 @@ package com.example.recycleapplication.model;
 public enum Bread {
     BRIOCHE("Brioche"),
     WHEAT("Wheat"),
-    PRETZEL("Pretzel");
+    PRETZEL("Pretzel"),
+    BAGEL("Bagel"),
+    SOURDOUGH("Sourdough");
 
     private final String name;
 
@@ -15,4 +17,5 @@ public enum Bread {
     public String toString() {
         return name;
     }
+
 }

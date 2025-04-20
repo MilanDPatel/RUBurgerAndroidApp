@@ -68,13 +68,21 @@ public class BurgerActivity extends AppCompatActivity {
     }
 
     private void initializeComponents() {
-        // Bread spinner
+        // Bread spinner with filtered options
         spinnerBread = findViewById(R.id.spinnerBread);
+
+        // Create a filtered list with only the three breads for burgers
+        ArrayList<Bread> burgerBreads = new ArrayList<>();
+        burgerBreads.add(Bread.BRIOCHE);
+        burgerBreads.add(Bread.WHEAT);
+        burgerBreads.add(Bread.PRETZEL);
+
         ArrayAdapter<Bread> breadAdapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_item, Bread.values());
+                this, android.R.layout.simple_spinner_item, burgerBreads);
         breadAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerBread.setAdapter(breadAdapter);
 
+        // Rest of your initialization code remains the same
         // Patty radio group
         radioGroupPatty = findViewById(R.id.radioGroupPatty);
         radioSinglePatty = findViewById(R.id.radioSinglePatty);

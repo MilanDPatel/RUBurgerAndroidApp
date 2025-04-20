@@ -30,21 +30,25 @@ public class ComboActivity extends AppCompatActivity {
     private Spinner spinnerDrink;
     private Button btnAddComboToOrder;
     private Button btnGoBack;
-    private TextView tvBurgerDetails;
+    private TextView tvMainItemDetails;
     private TextView tvComboPrice;
 
     // Model objects
-    private Burger selectedBurger;
+    private Item selectedMainItem; // Can be a burger or a sandwich
     private Item selectedSide;
     private Item selectedDrink;
     private Combo currentCombo;
     private Order currentOrder;
+    private boolean isBurger; // Flag to determine if main item is a burger or sandwich
 
     // Data
     private List<String> sideNames;
     private List<String> drinkNames;
     private Map<String, Double> sidePrices;
     private Map<String, Double> drinkPrices;
+
+    // Fixed combo add-on price
+    private static final double COMBO_ADDON_PRICE = 2.00;
 
     // Formatter for price display
     private final DecimalFormat df = new DecimalFormat("$#,##0.00");
@@ -54,19 +58,24 @@ public class ComboActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_combo);
 
-        // Get data passed from BurgerActivity
+        // Get data passed from previous Activity
         if (getIntent().hasExtra("burger") && getIntent().hasExtra("order")) {
-            selectedBurger = (Burger) getIntent().getSerializableExtra("burger");
+            selectedMainItem = (Burger) getIntent().getSerializableExtra("burger");
             currentOrder = (Order) getIntent().getSerializableExtra("order");
+            isBurger = true;
+        } else if (getIntent().hasExtra("sandwich") && getIntent().hasExtra("order")) {
+            selectedMainItem = (Item) getIntent().getSerializableExtra("sandwich");
+            currentOrder = (Order) getIntent().getSerializableExtra("order");
+            isBurger = false;
         } else {
-            Toast.makeText(this, "Error: Burger data missing", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error: Main item data missing", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
 
         // Initialize combo
         currentCombo = new Combo();
-        currentCombo.setSandwich(selectedBurger);
+        currentCombo.setSandwich(selectedMainItem);
 
         // Initialize UI components
         initializeComponents();
@@ -77,8 +86,8 @@ public class ComboActivity extends AppCompatActivity {
         // Set up spinners
         setupSpinners();
 
-        // Display burger details
-        displayBurgerDetails();
+        // Display main item details
+        displayMainItemDetails();
 
         // Initialize default selections
         if (!sideNames.isEmpty()) {
@@ -100,7 +109,7 @@ public class ComboActivity extends AppCompatActivity {
         spinnerDrink = findViewById(R.id.spinnerDrink);
         btnAddComboToOrder = findViewById(R.id.btnAddComboToOrder);
         btnGoBack = findViewById(R.id.btnGoBack);
-        tvBurgerDetails = findViewById(R.id.tvBurgerDetails);
+        tvMainItemDetails = findViewById(R.id.tvBurgerDetails); // Keep using the existing ID
         tvComboPrice = findViewById(R.id.tvComboPrice);
 
         // Button listeners
@@ -113,31 +122,25 @@ public class ComboActivity extends AppCompatActivity {
         sideNames = new ArrayList<>();
         sidePrices = new HashMap<>();
 
-        sideNames.add("French Fries");
-        sideNames.add("Onion Rings");
-        sideNames.add("Side Salad");
-        sideNames.add("Coleslaw");
+        sideNames.add("Chips (Small)");
+        sideNames.add("Apple (Small)");
 
-        sidePrices.put("French Fries", 2.99);
-        sidePrices.put("Onion Rings", 3.49);
-        sidePrices.put("Side Salad", 3.99);
-        sidePrices.put("Coleslaw", 2.49);
+        // All sides are included in the combo price
+        sidePrices.put("Chips (Small)", 0.0);
+        sidePrices.put("Apple (Small)", 0.0);
 
         // Initialize drink items data
         drinkNames = new ArrayList<>();
         drinkPrices = new HashMap<>();
 
-        drinkNames.add("Soda");
-        drinkNames.add("Water");
-        drinkNames.add("Iced Tea");
-        drinkNames.add("Lemonade");
-        drinkNames.add("Coffee");
+        drinkNames.add("Cola (Medium)");
+        drinkNames.add("Tea (Medium)");
+        drinkNames.add("Juice (Medium)");
 
-        drinkPrices.put("Soda", 1.99);
-        drinkPrices.put("Water", 1.49);
-        drinkPrices.put("Iced Tea", 2.29);
-        drinkPrices.put("Lemonade", 2.49);
-        drinkPrices.put("Coffee", 1.79);
+        // All drinks are included in the combo price
+        drinkPrices.put("Cola (Medium)", 0.0);
+        drinkPrices.put("Tea (Medium)", 0.0);
+        drinkPrices.put("Juice (Medium)", 0.0);
     }
 
     private Item createSideItem(String sideName) {
@@ -156,15 +159,10 @@ public class ComboActivity extends AppCompatActivity {
 
     private void setupSpinners() {
         // Side spinner setup
-        List<String> sideDisplayItems = new ArrayList<>();
-        for (String sideName : sideNames) {
-            sideDisplayItems.add(sideName + " - " + df.format(sidePrices.get(sideName)));
-        }
-
         ArrayAdapter<String> sideAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
-                sideDisplayItems
+                sideNames
         );
         sideAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSide.setAdapter(sideAdapter);
@@ -184,15 +182,10 @@ public class ComboActivity extends AppCompatActivity {
         });
 
         // Drink spinner setup
-        List<String> drinkDisplayItems = new ArrayList<>();
-        for (String drinkName : drinkNames) {
-            drinkDisplayItems.add(drinkName + " - " + df.format(drinkPrices.get(drinkName)));
-        }
-
         ArrayAdapter<String> drinkAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
-                drinkDisplayItems
+                drinkNames
         );
         drinkAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDrink.setAdapter(drinkAdapter);
@@ -212,78 +205,95 @@ public class ComboActivity extends AppCompatActivity {
         });
     }
 
-    private void displayBurgerDetails() {
-        StringBuilder details = new StringBuilder("Selected Burger:\n");
+    private void displayMainItemDetails() {
+        StringBuilder details = new StringBuilder();
 
-        // Add burger type details
-        details.append(selectedBurger.getBread().toString()).append(" bun with ");
-        details.append(selectedBurger.isDoublePatty() ? "double" : "single").append(" patty\n");
+        if (isBurger) {
+            Burger burger = (Burger) selectedMainItem;
+            details.append("Selected Burger:\n");
+            details.append(burger.getBread().toString()).append(" bun with ");
+            details.append(burger.isDoublePatty() ? "double" : "single").append(" patty\n");
 
-        // Add toppings
-        if (!selectedBurger.getAddOns().isEmpty()) {
-            details.append("Toppings: ");
-            for (int i = 0; i < selectedBurger.getAddOns().size(); i++) {
-                details.append(selectedBurger.getAddOns().get(i).toString());
-                if (i < selectedBurger.getAddOns().size() - 1) {
-                    details.append(", ");
+            // Add toppings for burger
+            if (!burger.getAddOns().isEmpty()) {
+                details.append("Toppings: ");
+                for (int i = 0; i < burger.getAddOns().size(); i++) {
+                    details.append(burger.getAddOns().get(i).toString());
+                    if (i < burger.getAddOns().size() - 1) {
+                        details.append(", ");
+                    }
                 }
+                details.append("\n");
             }
-            details.append("\n");
+
+            // Add quantity
+            details.append("Quantity: ").append(burger.getQuantity()).append("\n");
+            details.append("Price: ").append(df.format(calculateMainItemPrice())).append("\n");
+        } else {
+            // Display sandwich details
+            details.append("Selected Sandwich:\n");
+            details.append("Price: ").append(df.format(selectedMainItem.getPrice())).append("\n");
+            details.append("Quantity: ").append(selectedMainItem.getQuantity()).append("\n");
         }
 
-        // Add quantity and price
-        details.append("Quantity: ").append(selectedBurger.getQuantity()).append("\n");
-
-        tvBurgerDetails.setText(details.toString());
+        tvMainItemDetails.setText(details.toString());
     }
 
     private void updateComboPrice() {
-        double burgerPrice = calculateBurgerPrice();
-        double sidePrice = (selectedSide != null) ? selectedSide.getPrice() : 0;
-        double drinkPrice = (selectedDrink != null) ? selectedDrink.getPrice() : 0;
-
-        double totalIndividualPrice = burgerPrice + sidePrice + drinkPrice;
-        // Apply combo discount (10% off)
-        double comboDiscount = 0.1;
-        double discountedPrice = totalIndividualPrice * (1 - comboDiscount);
-
-        // Calculate savings
-        double savings = totalIndividualPrice - discountedPrice;
+        double mainItemPrice = calculateMainItemPrice();
+        double comboPrice = mainItemPrice + COMBO_ADDON_PRICE;
 
         // Update price display
-        String priceText = "Individual Items: " + df.format(totalIndividualPrice) + "\n" +
-                "Combo Price: " + df.format(discountedPrice) + "\n" +
-                "You Save: " + df.format(savings);
+        String priceText = (isBurger ? "Burger" : "Sandwich") + " Price: " + df.format(mainItemPrice) + "\n" +
+                "Combo Addition: " + df.format(COMBO_ADDON_PRICE) + "\n" +
+                "Total Combo Price: " + df.format(comboPrice);
 
         tvComboPrice.setText(priceText);
     }
 
-    private double calculateBurgerPrice() {
-        double basePrice = 6.99;
-        if (selectedBurger.isDoublePatty()) {
-            basePrice += 2.50;
+    private double calculateMainItemPrice() {
+        if (isBurger) {
+            // Use burger calculation method
+            Burger burger = (Burger) selectedMainItem;
+            double basePrice = 6.99;
+            if (burger.isDoublePatty()) {
+                basePrice += 2.50;
+            }
+            for (int i = 0; i < burger.getAddOns().size(); i++) {
+                basePrice += burger.getAddOns().get(i).getPrice();
+            }
+            return basePrice * burger.getQuantity();
+        } else {
+            // For sandwich, directly access the price from the item
+            // Debug line - output the actual price to the console
+            System.out.println("Sandwich price: " + selectedMainItem.getPrice());
+
+            return selectedMainItem.getPrice() * selectedMainItem.getQuantity();
         }
-        for (int i = 0; i < selectedBurger.getAddOns().size(); i++) {
-            basePrice += selectedBurger.getAddOns().get(i).getPrice();
-        }
-        return basePrice * selectedBurger.getQuantity();
+    }
+
+    private double calculateComboPrice() {
+        return calculateMainItemPrice() + COMBO_ADDON_PRICE;
     }
 
     private void addComboToOrder() {
-        // Ensure all combo items are selected
-        if (selectedSide == null || selectedDrink == null) {
-            Toast.makeText(this, "Please select both a side and a drink", Toast.LENGTH_SHORT).show();
+        // Create a new combo item
+        Item comboItem = new Item();
+        double finalPrice = calculateComboPrice();
+
+        // Make sure we don't add $0 combos
+        if (finalPrice <= COMBO_ADDON_PRICE) {
+            Toast.makeText(this, "Error: Invalid main item price", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Since Order.addItem expects an Item, we'll add the
-        // burger, side, and drink individually to the order
-        // instead of adding the combo directly.
-        currentOrder.addItem(selectedBurger);
-        currentOrder.addItem(selectedSide);
-        currentOrder.addItem(selectedDrink);
+        comboItem.setPrice(finalPrice);
+        comboItem.setQuantity(1);
 
-        // Return result to BurgerActivity
+        // Add the combo item to the order
+        currentOrder.addItem(comboItem);
+
+        // Return result to previous Activity
         Intent resultIntent = new Intent();
         resultIntent.putExtra("combo_added", true);
         resultIntent.putExtra("order", currentOrder);

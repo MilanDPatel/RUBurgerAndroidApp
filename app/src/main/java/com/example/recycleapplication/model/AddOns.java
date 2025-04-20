@@ -1,11 +1,11 @@
 package com.example.recycleapplication.model;
 
 public enum AddOns {
-    LETTUCE("Lettuce", 0.25),
-    TOMATOES("Tomatoes", 0.25),
-    ONIONS("Onions", 0.25),
-    AVOCADO("Avocado", 1.50),
-    CHEESE("Cheese", 0.75);
+    LETTUCE("Lettuce", 0.30),
+    TOMATOES("Tomatoes", 0.30),
+    ONIONS("Onions", 0.30),
+    AVOCADO("Avocado", 0.50),
+    CHEESE("Cheese", 1.00);
 
     private final String name;
     private final double price;
