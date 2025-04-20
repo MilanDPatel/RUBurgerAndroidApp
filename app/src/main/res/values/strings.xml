@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RecyclerView Sample Code</string>
+    <string name="app_name">RU BURGER</string>
     <string-array name="beverageNames">
         <item>Cola</item>
         <item>Tea</item>
