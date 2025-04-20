@@ -12,10 +12,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.recycleapplication.model.Bread;
 import com.example.recycleapplication.model.Burger;
 import com.example.recycleapplication.model.Combo;
 import com.example.recycleapplication.model.Item;
 import com.example.recycleapplication.model.Order;
+import com.example.recycleapplication.model.Protein;
+import com.example.recycleapplication.model.Sandwich; // Added import for Sandwich class
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -64,7 +67,7 @@ public class ComboActivity extends AppCompatActivity {
             currentOrder = (Order) getIntent().getSerializableExtra("order");
             isBurger = true;
         } else if (getIntent().hasExtra("sandwich") && getIntent().hasExtra("order")) {
-            selectedMainItem = (Item) getIntent().getSerializableExtra("sandwich");
+            selectedMainItem = (Sandwich) getIntent().getSerializableExtra("sandwich");
             currentOrder = (Order) getIntent().getSerializableExtra("order");
             isBurger = false;
         } else {
@@ -230,10 +233,27 @@ public class ComboActivity extends AppCompatActivity {
             details.append("Quantity: ").append(burger.getQuantity()).append("\n");
             details.append("Price: ").append(df.format(calculateMainItemPrice())).append("\n");
         } else {
-            // Display sandwich details
+            // Display sandwich details using the Sandwich class
+            Sandwich sandwich = (Sandwich) selectedMainItem;
             details.append("Selected Sandwich:\n");
-            details.append("Price: ").append(df.format(selectedMainItem.getPrice())).append("\n");
-            details.append("Quantity: ").append(selectedMainItem.getQuantity()).append("\n");
+            details.append(sandwich.getBread().toString()).append(" with ");
+            details.append(sandwich.getProtein().toString()).append("\n");
+
+            // Add toppings for sandwich
+            if (!sandwich.getAddOns().isEmpty()) {
+                details.append("Toppings: ");
+                for (int i = 0; i < sandwich.getAddOns().size(); i++) {
+                    details.append(sandwich.getAddOns().get(i).toString());
+                    if (i < sandwich.getAddOns().size() - 1) {
+                        details.append(", ");
+                    }
+                }
+                details.append("\n");
+            }
+
+            // Add quantity
+            details.append("Quantity: ").append(sandwich.getQuantity()).append("\n");
+            details.append("Price: ").append(df.format(calculateMainItemPrice())).append("\n");
         }
 
         tvMainItemDetails.setText(details.toString());
@@ -264,11 +284,28 @@ public class ComboActivity extends AppCompatActivity {
             }
             return basePrice * burger.getQuantity();
         } else {
-            // For sandwich, directly access the price from the item
-            // Debug line - output the actual price to the console
-            System.out.println("Sandwich price: " + selectedMainItem.getPrice());
+            // For sandwich, use the item price from the Sandwich object
+            Sandwich sandwich = (Sandwich) selectedMainItem;
 
-            return selectedMainItem.getPrice() * selectedMainItem.getQuantity();
+            double basePrice = 10.99;
+
+            if (sandwich.getProtein() == Protein.ROAST_BEEF) {
+                basePrice = 10.99;
+            }
+            else if (sandwich.getProtein() == Protein.SALMON) {
+                basePrice = 9.99;
+            }
+            else if (sandwich.getProtein() == Protein.CHICKEN) {
+                basePrice = 8.99;
+            }
+
+
+            // Add price for add-ons
+            for (int i = 0; i < sandwich.getAddOns().size(); i++) {
+                basePrice += sandwich.getAddOns().get(i).getPrice();
+            }
+
+            return basePrice * sandwich.getQuantity();
         }
     }
 
