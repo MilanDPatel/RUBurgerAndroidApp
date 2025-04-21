@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.recycleapplication.model.Burger;
 import com.example.recycleapplication.model.Item;
 import com.example.recycleapplication.model.Order;
+import com.example.recycleapplication.model.OrderManager;
 import com.example.recycleapplication.model.Sandwich;
 
 import java.text.DecimalFormat;
@@ -25,6 +26,7 @@ public class CurrentOrderActivity extends AppCompatActivity {
 
     private ArrayAdapter<Item> adapter;
     private Order currentOrder;
+    private OrderManager orderManager;
 
     private final double TAX_RATE = 0.06625;
     private final DecimalFormat df = new DecimalFormat("$#,##0.00");
@@ -35,7 +37,7 @@ public class CurrentOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_current_order);
 
         currentOrder = Order.getInstance();
-
+        orderManager = OrderManager.getInstance();
 
 
 
@@ -75,7 +77,11 @@ public class CurrentOrderActivity extends AppCompatActivity {
 
         placeOrderButton.setOnClickListener(v -> {
             if (!currentOrder.getItems().isEmpty()) {
+                Order order = new Order(currentOrder);
+                orderManager.addOrder(order);
                 currentOrder.clear();
+                int num = currentOrder.getNumber();
+                currentOrder.setNumber(num + 1);
                 adapter.notifyDataSetChanged();
                 orderListView.clearChoices();
                 updateTotals();

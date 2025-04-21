@@ -4,9 +4,16 @@ import java.util.List;
 public final class Order {
     private static Order order;
     private List<Item> items;
+    private int number;
 
     public Order() {
         this.items = new ArrayList<>();
+        number = 1;
+    }
+
+    public Order(Order order) {
+        this.number = order.number;
+        this.items = new ArrayList<>(order.items);
     }
     public static synchronized Order getInstance() {
         if (order == null) {
@@ -25,6 +32,13 @@ public final class Order {
         if (index >= 0 && index < items.size()) {
             items.remove(index);
         }
+    }
+
+    public void setNumber(int num) {
+        number = num;
+    }
+    public int getNumber() {
+        return number;
     }
     public void clear() {
         items.clear();
