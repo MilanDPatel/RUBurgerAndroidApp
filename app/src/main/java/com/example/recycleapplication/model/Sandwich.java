@@ -111,7 +111,16 @@ public class Sandwich extends Item {
         this.quantity = quantity;
     }
 
+    @Override
+    public double getPrice() {
+        double basePrice = protein.getPrice();
 
+        for (AddOns addOn : addOns) {
+            basePrice += addOn.getPrice();
+        }
+
+        return basePrice * quantity;
+    }
 
     /**
      * Creates a description of the sandwich.

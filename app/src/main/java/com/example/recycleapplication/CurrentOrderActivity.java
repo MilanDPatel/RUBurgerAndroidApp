@@ -34,17 +34,9 @@ public class CurrentOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_order);
 
-        if (getIntent().getSerializableExtra("order") != null) {
-            currentOrder = (Order) getIntent().getSerializableExtra("order");
-            Log.d("CurrentOrderActivity", "Not null. Received order with " + currentOrder.getItems().size() + " items");
-            for (Item item : currentOrder.getItems()) {
-                Log.d("CurrentOrderActivity", "Item: " + item.toString());
-            }
-        }
+        currentOrder = Order.getInstance();
 
-//        List<Item> items = new ArrayList<>(); //Test list, remove later.
-//        items.add(new Burger());
-//        items.add(new Sandwich());
+
 
 
         orderListView = findViewById(R.id.orderListView);
@@ -59,9 +51,7 @@ public class CurrentOrderActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_single_choice,
                 currentOrder.getItems());
 
-//        adapter = new ArrayAdapter<>(this,
-//                android.R.layout.simple_list_item_single_choice,
-//                items);
+
 
         Log.d("AdapterDebug", "Adapter count: " + adapter.getCount());
         for (int i = 0; i < adapter.getCount(); i++) {
@@ -76,7 +66,6 @@ public class CurrentOrderActivity extends AppCompatActivity {
             int pos = orderListView.getCheckedItemPosition();
             if (pos != ListView.INVALID_POSITION) {
                 currentOrder.removeItem(pos);
-//                items.remove(pos); //Remove later.
                 adapter.notifyDataSetChanged();
                 orderListView.clearChoices();
                 updateTotals();

@@ -62,13 +62,11 @@ public class ComboActivity extends AppCompatActivity {
         setContentView(R.layout.activity_combo);
 
         // Get data passed from previous Activity
-        if (getIntent().hasExtra("burger") && getIntent().hasExtra("order")) {
+        if (getIntent().hasExtra("burger")) {
             selectedMainItem = (Burger) getIntent().getSerializableExtra("burger");
-            currentOrder = (Order) getIntent().getSerializableExtra("order");
             isBurger = true;
-        } else if (getIntent().hasExtra("sandwich") && getIntent().hasExtra("order")) {
+        } else if (getIntent().hasExtra("sandwich")) {
             selectedMainItem = (Sandwich) getIntent().getSerializableExtra("sandwich");
-            currentOrder = (Order) getIntent().getSerializableExtra("order");
             isBurger = false;
         } else {
             Toast.makeText(this, "Error: Main item data missing", Toast.LENGTH_SHORT).show();
@@ -76,6 +74,7 @@ public class ComboActivity extends AppCompatActivity {
             return;
         }
 
+        currentOrder = Order.getInstance();
         // Initialize combo
         currentCombo = new Combo();
         currentCombo.setSandwich(selectedMainItem);
@@ -333,7 +332,6 @@ public class ComboActivity extends AppCompatActivity {
         // Return result to previous Activity
         Intent resultIntent = new Intent();
         resultIntent.putExtra("combo_added", true);
-        resultIntent.putExtra("order", currentOrder);
         setResult(RESULT_OK, resultIntent);
 
         Toast.makeText(this, "Combo added to order", Toast.LENGTH_SHORT).show();

@@ -10,7 +10,7 @@ import com.example.recycleapplication.model.Order;
 
 public class MainMenuActivity extends AppCompatActivity {
 
-    private Order currentOrder;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +18,6 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
         // Initialize order
-        currentOrder = new Order();
 
         // Drinks button
         Button drinksButton = findViewById(R.id.btn_drinks); // Use your actual button ID
@@ -46,7 +45,6 @@ public class MainMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainMenuActivity.this, BurgerActivity.class);
-                intent.putExtra("order", currentOrder);
                 startActivity(intent);
             }
         });
@@ -56,7 +54,6 @@ public class MainMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainMenuActivity.this, SandwichActivity.class);
-                intent.putExtra("order", currentOrder);
                 startActivity(intent);
             }
         });
@@ -66,7 +63,6 @@ public class MainMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainMenuActivity.this, CurrentOrderActivity.class);
-                intent.putExtra("order", currentOrder);
                 startActivity(intent);
             }
         });

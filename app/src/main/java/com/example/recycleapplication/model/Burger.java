@@ -43,4 +43,19 @@ public class Burger extends Item {
     public List<AddOns> getAddOns() {
         return addOns;
     }
+
+    @Override
+    public double getPrice() {
+        double burgerPrice = protein.getPrice();
+
+        if (doublePatty) {
+            burgerPrice += 2.50;
+        }
+
+        for (AddOns addOn : addOns) {
+            burgerPrice += addOn.getPrice();
+        }
+
+        return burgerPrice;
+    }
 }

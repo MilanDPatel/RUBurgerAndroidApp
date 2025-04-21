@@ -1,15 +1,19 @@
 package com.example.recycleapplication.model;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-public class Order implements Serializable {
+public final class Order {
+    private static Order order;
     private List<Item> items;
 
     public Order() {
         this.items = new ArrayList<>();
     }
-
+    public static synchronized Order getInstance() {
+        if (order == null) {
+            order = new Order();
+        }
+        return order;
+    }
     public void addItem(Item item) {
         items.add(item);
     }

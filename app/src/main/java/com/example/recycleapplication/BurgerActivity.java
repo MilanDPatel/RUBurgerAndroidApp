@@ -51,11 +51,7 @@ public class BurgerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_burger);
 
         // Initialize order if not passed in
-        if (getIntent().getSerializableExtra("order") != null) {
-            currentOrder = (Order) getIntent().getSerializableExtra("order");
-        } else {
-            currentOrder = new Order();
-        }
+        currentOrder = Order.getInstance();
 
         // Initialize UI components
         initializeComponents();
@@ -226,7 +222,6 @@ public class BurgerActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, ComboActivity.class);
         intent.putExtra("burger", currentBurger);
-        intent.putExtra("order", currentOrder);
         startActivity(intent);
     }
 
