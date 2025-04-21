@@ -46,6 +46,9 @@
         <activity android:name=".CurrentOrderActivity"
             android:exported="false"/>
 
+        <activity android:name=".AllOrdersActivity"
+            android:exported="false"/>
+
         <!-- If you plan to implement the ComboActivity as well, add this too -->
 
         <!-- Launcher activity with menu buttons -->

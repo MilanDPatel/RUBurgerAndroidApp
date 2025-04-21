@@ -5,6 +5,7 @@ public final class Order {
     private static Order order;
     private List<Item> items;
     private int number;
+    private final double TAX_RATE = 0.06625;
 
     public Order() {
         this.items = new ArrayList<>();
@@ -42,5 +43,14 @@ public final class Order {
     }
     public void clear() {
         items.clear();
+    }
+
+    public double getTotal() {
+        double total = 0;
+        for (Item item: getItems()) {
+            total += item.getPrice();
+        }
+        total += total * TAX_RATE;
+        return total;
     }
 }
