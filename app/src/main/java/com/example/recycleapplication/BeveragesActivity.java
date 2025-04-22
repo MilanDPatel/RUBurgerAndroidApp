@@ -11,7 +11,8 @@ import java.util.ArrayList;
 
 public class BeveragesActivity extends AppCompatActivity {
     private static final String TAG = "BeveragesActivity";
-    private ArrayList<Item> beverageItems = new ArrayList<>();
+    private ArrayList<com.example.recycleapplication.model.Item> beverageItems = new ArrayList<>();
+
 
     // Images for beverage items
     private int[] beverageImages = {
@@ -83,7 +84,12 @@ public class BeveragesActivity extends AppCompatActivity {
             count = Math.min(count, beveragePrices.length);
 
             for (int i = 0; i < count; i++) {
-                beverageItems.add(new Item(beverageNames[i], beverageImages[i], beveragePrices[i]));
+                // Create a beverage Item using your model class
+                double price = Double.parseDouble(beveragePrices[i].replace("$", ""));
+                com.example.recycleapplication.model.Item beverage =
+                        new com.example.recycleapplication.model.Item(beverageNames[i], price);
+                beverage.setImageResourceId(beverageImages[i]);
+                beverageItems.add(beverage);
             }
             return true;
         } catch (Exception e) {

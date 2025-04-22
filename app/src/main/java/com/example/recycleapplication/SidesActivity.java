@@ -1,14 +1,13 @@
 package com.example.recycleapplication;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.recycleapplication.model.Item; // Import the correct Item class
 
 import java.util.ArrayList;
 
@@ -73,7 +72,14 @@ public class SidesActivity extends AppCompatActivity {
             count = Math.min(count, sidePrices.length);
 
             for (int i = 0; i < count; i++) {
-                sideItems.add(new Item(sideNames[i], sideImages[i], sidePrices[i]));
+                // Parse the price string to a double
+                double price = Double.parseDouble(sidePrices[i].replace("$", ""));
+
+                // Create item using the model Item class constructor
+                Item sideItem = new Item(sideNames[i], price);
+                sideItem.setImageResourceId(sideImages[i]);
+
+                sideItems.add(sideItem);
             }
             return true;
         } catch (Exception e) {

@@ -24,15 +24,4 @@ public class Item {
 		return name;
 	}
 
-	public int getImageResourceId() {
-		return imageResourceId;
-	}
-
-	public String getPriceString() {
-		return priceString;
-	}
-
-	public double getPrice() {
-		return price;
-	}
 }

@@ -9,6 +9,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.recycleapplication.model.Item;
+import com.example.recycleapplication.model.Order;
+
 public class SizesActivity extends AppCompatActivity {
     private static final String TAG = "SizesActivity";
 
@@ -20,6 +23,8 @@ public class SizesActivity extends AppCompatActivity {
     private int quantity = 1;
     private double basePrice = 1.99;
     private double currentPrice = 1.99;
+    private String itemName;
+    private int imageResId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +42,8 @@ public class SizesActivity extends AppCompatActivity {
         Button addToCartButton = findViewById(R.id.add_to_cart_button);
 
         // Get data from intent
-        String itemName = getIntent().getStringExtra("item_name");
-        int imageResId = getIntent().getIntExtra("image_res_id", 0);
+        itemName = getIntent().getStringExtra("item_name");
+        imageResId = getIntent().getIntExtra("image_res_id", 0);
         basePrice = getIntent().getDoubleExtra("base_price", 1.99);
         currentPrice = basePrice;
 
@@ -95,11 +100,25 @@ public class SizesActivity extends AppCompatActivity {
             RadioButton selectedRadioButton = findViewById(sizeRadioGroup.getCheckedRadioButtonId());
             String selectedSize = selectedRadioButton != null ? selectedRadioButton.getText().toString() : "Small";
 
+            // Create an Item and add it to the order
+            Item item = new Item();
+            item.setItemName(selectedSize + " " + itemName);
+            item.setPrice(currentPrice);
+            item.setQuantity(quantity);
+            item.setImageResourceId(imageResId);
+
+            // Get the order instance and add the item
+            Order currentOrder = Order.getInstance();
+
+            // Add the item quantity times
+            for (int i = 0; i < quantity; i++) {
+                currentOrder.addItem(item);
+            }
+
             String message = "Added to cart: " + quantity + " " + selectedSize + " " + itemName;
             Toast.makeText(SizesActivity.this, message, Toast.LENGTH_SHORT).show();
 
-            // Here you would typically save the item to a cart data structure
-            // For now, we'll just finish the activity
+            // Finish activity to return to previous screen
             finish();
         });
     }
