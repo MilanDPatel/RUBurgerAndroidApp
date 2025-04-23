@@ -111,9 +111,8 @@ public class SizesActivity extends AppCompatActivity {
             Order currentOrder = Order.getInstance();
 
             // Add the item quantity times
-            for (int i = 0; i < quantity; i++) {
-                currentOrder.addItem(item);
-            }
+            currentOrder.addItem(item);
+
 
             String message = "Added to cart: " + quantity + " " + selectedSize + " " + itemName;
             Toast.makeText(SizesActivity.this, message, Toast.LENGTH_SHORT).show();

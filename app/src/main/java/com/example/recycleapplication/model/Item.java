@@ -36,7 +36,7 @@ public class Item implements Serializable {
     }
 
     public double getPrice() {
-        return price;
+        return quantity * price;
     }
 
     public void setPrice(double price) {
@@ -58,6 +58,6 @@ public class Item implements Serializable {
 
     @Override
     public String toString() {
-        return itemName + " - " + getFormattedPrice();
+        return itemName + " - " + getFormattedPrice() + " (" + quantity + ")";
     }
 }

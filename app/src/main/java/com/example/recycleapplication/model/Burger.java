@@ -2,11 +2,14 @@ package com.example.recycleapplication.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
+
 public class Burger extends Item {
     private Bread bread;
     private Protein protein;
     private boolean doublePatty;
     private List<AddOns> addOns;
+    private int quantity;
 
     public Burger() {
         super();
@@ -39,7 +42,13 @@ public class Burger extends Item {
     public void setDoublePatty(boolean doublePatty) {
         this.doublePatty = doublePatty;
     }
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
+    public int getQuantity() {
+        return quantity;
+    }
     public List<AddOns> getAddOns() {
         return addOns;
     }
@@ -56,6 +65,29 @@ public class Burger extends Item {
             burgerPrice += addOn.getPrice();
         }
 
-        return burgerPrice;
+        return quantity * burgerPrice;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(doublePatty ? "Double" : "Single").append(" Burger on ").append(bread);
+
+
+        if (!addOns.isEmpty()) {
+            sb.append(" with ");
+            StringJoiner joiner = new StringJoiner(", ");
+            for (AddOns addOn : addOns) {
+                joiner.add(addOn.toString());
+            }
+            sb.append(joiner);
+        }
+
+
+        sb.append(" (").append(quantity).append(")");
+        sb.append(" $").append(String.format("%.2f", getPrice()));
+
+
+        return sb.toString();
     }
 }
