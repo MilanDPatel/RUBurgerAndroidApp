@@ -147,6 +147,7 @@ public class ComboActivity extends AppCompatActivity {
 
     private Item createSideItem(String sideName) {
         Item item = new Item();
+        item.setItemName(sideName);
         item.setPrice(sidePrices.get(sideName));
         item.setQuantity(1);
         return item;
@@ -154,6 +155,7 @@ public class ComboActivity extends AppCompatActivity {
 
     private Item createDrinkItem(String drinkName) {
         Item item = new Item();
+        item.setItemName(drinkName);
         item.setPrice(drinkPrices.get(drinkName));
         item.setQuantity(1);
         return item;
@@ -323,6 +325,8 @@ public class ComboActivity extends AppCompatActivity {
             return;
         }
 
+        String name = "Combo " + selectedMainItem.toString() + " " + selectedSide.getItemName() + " " + selectedDrink.getItemName();
+        comboItem.setItemName(name);
         comboItem.setPrice(finalPrice);
         comboItem.setQuantity(1);
 

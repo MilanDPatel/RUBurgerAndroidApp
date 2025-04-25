@@ -33,5 +33,9 @@ public class Combo implements Serializable {
     public void setDrink(Item drink) {
         this.drink = drink;
     }
+
+    public String toString() {
+        return "Combo " + sandwich.toString() + side.toString() + drink.toString();
+    }
 }
 
