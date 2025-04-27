@@ -19,14 +19,14 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
-            android:contentDescription="Item Image" />
+            android:contentDescription="@string/item_image" />
 
         <TextView
             android:id="@+id/item_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Item Name"
+            android:text="@string/item_name"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="$0.00"
+            android:text="@string/price"
             android:textAlignment="center"
             android:textSize="16sp" />
     </LinearLayout>

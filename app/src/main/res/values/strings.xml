@@ -115,4 +115,33 @@
         <item>4</item>
         <item>5</item>
     </string-array>
+
+    <!-- Main Menu -->
+    <string name="restaurant_menu">Restaurant Menu</string>
+    <string name="Drinks">Drinks</string>
+    <string name="Sides">Sides</string>
+    <string name="Burgers">Burgers</string>
+    <string name="Sandwiches">Sandwiches</string>
+    <string name="view_all_orders">View All Orders</string>
+    <string name="view_order">View Order</string>
+
+    <!-- Sandwich -->
+    <string name="build_your_sandwich">Build Your Sandwich</string>
+    <string name="choose_bread">Choose Bread:</string>
+    <string name="choose_protein">Choose Protein:</string>
+    <string name="roast_beef">Roast Beef</string>
+    <string name="Salmon">Salmon</string>
+    <string name="Chicken">Chicken</string>
+    <string name="choose_addons">Choose Add-ons:</string>
+    <string name="price">$0.00</string>
+
+    <!-- Sizes -->
+    <string name="item_name">Item Name</string>
+    <string name="item_image">Item Image</string>
+    <string name="choose_a_size">Choose a Size:</string>
+    <string name="total_price">Total Price:</string>
+    <string name="add_to_cart">Add to Cart</string>
+
+    <!-- Row view -->
+    <string name="todo">TODO</string>
 </resources>

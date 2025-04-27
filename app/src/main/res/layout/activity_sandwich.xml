@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Build Your Sandwich"
+            android:text="@string/build_your_sandwich"
             android:textSize="24sp"
             android:textStyle="bold"
             android:gravity="center"
@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Choose Bread:"
+            android:text="@string/choose_bread"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginTop="8dp" />
@@ -41,7 +41,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Choose Protein:"
+            android:text="@string/choose_protein"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginTop="8dp" />
@@ -58,26 +58,26 @@
                 android:id="@+id/radioRoastBeef"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Roast Beef" />
+                android:text="@string/roast_beef"/>
 
             <RadioButton
                 android:id="@+id/radioSalmon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Salmon" />
+                android:text="@string/Salmon" />
 
             <RadioButton
                 android:id="@+id/radioChicken"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Chicken" />
+                android:text="@string/Chicken" />
         </RadioGroup>
 
         <!-- Add-ons -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Choose Add-ons:"
+            android:text="@string/choose_addons"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginTop="8dp" />
@@ -86,38 +86,38 @@
             android:id="@+id/checkLettuce"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lettuce" />
+            android:text="@string/lettuce" />
 
         <CheckBox
             android:id="@+id/checkTomatoes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tomatoes" />
+            android:text="@string/tomatoes" />
 
         <CheckBox
             android:id="@+id/checkOnions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Onions" />
+            android:text="@string/onions" />
 
         <CheckBox
             android:id="@+id/checkAvocado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Avocado" />
+            android:text="@string/avocado" />
 
         <CheckBox
             android:id="@+id/checkCheese"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cheese"
+            android:text="@string/cheese"
             android:layout_marginBottom="16dp" />
 
         <!-- Quantity -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Quantity:"
+            android:text="@string/quantity_label"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginTop="8dp" />
@@ -134,14 +134,14 @@
                 android:id="@+id/btnDecreaseQuantity"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:text="-"
+                android:text="@string/decrease_quantity"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tvQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
+                android:text="@string/default_quantity"
                 android:textSize="20sp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp" />
@@ -150,7 +150,7 @@
                 android:id="@+id/btnIncreaseQuantity"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:text="+"
+                android:text="@string/increase_quantity"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -158,7 +158,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Price:"
+            android:text="@string/price_label"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginTop="8dp" />
@@ -167,7 +167,7 @@
             android:id="@+id/tvPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="$0.00"
+            android:text="@string/price"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginTop="8dp"
@@ -185,7 +185,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Add to Order"
+                android:text="@string/add_to_order"
                 android:layout_marginEnd="8dp" />
 
             <Button
@@ -193,7 +193,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Make it a Combo"
+                android:text="@string/make_combo"
                 android:layout_marginStart="8dp" />
         </LinearLayout>
     </LinearLayout>

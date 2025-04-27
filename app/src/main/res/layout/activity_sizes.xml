@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Item Name"
+        android:text="@string/item_name"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginTop="16dp"
-        android:contentDescription="Item Image"
+        android:contentDescription="@string/item_image"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Choose a Size:"
+        android:text="@string/choose_a_size"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/size_radio_group"
         app:layout_constraintTop_toBottomOf="@+id/item_image" />
@@ -53,19 +53,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Small" />
+            android:text="@string/size_small" />
 
         <RadioButton
             android:id="@+id/size_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Medium" />
+            android:text="@string/size_medium" />
 
         <RadioButton
             android:id="@+id/size_large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Large" />
+            android:text="@string/size_large" />
     </RadioGroup>
 
     <TextView
@@ -73,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Quantity:"
+        android:text="@string/quantity_label"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/size_radio_group"
         app:layout_constraintTop_toBottomOf="@+id/size_radio_group" />
@@ -83,7 +83,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
-        android:text="-"
+        android:text="@string/decrease_quantity"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/quantity_label"
         app:layout_constraintTop_toBottomOf="@+id/quantity_label" />
@@ -94,7 +94,7 @@
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:gravity="center"
-        android:text="1"
+        android:text="@string/default_quantity"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/minus_button"
         app:layout_constraintStart_toEndOf="@+id/minus_button"
@@ -105,7 +105,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
-        android:text="+"
+        android:text="@string/increase_quantity"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/quantity_text"
         app:layout_constraintStart_toEndOf="@+id/quantity_text"
@@ -116,7 +116,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Total Price:"
+        android:text="@string/total_price"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/minus_button"
         app:layout_constraintTop_toBottomOf="@+id/minus_button" />
@@ -140,7 +140,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="32dp"
-        android:text="Add to Cart"
+        android:text="@string/add_to_cart"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

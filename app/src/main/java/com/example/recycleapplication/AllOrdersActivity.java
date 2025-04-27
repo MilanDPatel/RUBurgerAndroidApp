@@ -97,6 +97,6 @@ public class AllOrdersActivity extends AppCompatActivity {
 
         itemAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, selectedOrder.getItems());
         listViewItems.setAdapter(itemAdapter);
-        textTotal.setText("$" + df.format(selectedOrder.getTotal()));
+        textTotal.setText(df.format(selectedOrder.getTotal()));
     }
 }
