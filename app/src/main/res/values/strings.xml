@@ -1,5 +1,54 @@
 <resources>
     <string name="app_name">RU BURGER</string>
+
+    <!-- MainActivity Strings -->
+    <string name="menu_categories_title">Menu Categories</string>
+    <string name="beverages_button">Beverages</string>
+    <string name="side_items_button">Side Items</string>
+
+    <!-- Burger Activity Strings -->
+    <string name="burger_title">Customize Your Burger</string>
+    <string name="bread_label">Bread Type:</string>
+    <string name="patty_label">Patty Option:</string>
+    <string name="single_patty">Single Patty</string>
+    <string name="double_patty">Double Patty</string>
+    <string name="add_ons_label">Add-Ons:</string>
+    <string name="lettuce">Lettuce</string>
+    <string name="tomatoes">Tomatoes</string>
+    <string name="onions">Onions</string>
+    <string name="avocado">Avocado</string>
+    <string name="cheese">Cheese</string>
+    <string name="quantity_label">Quantity:</string>
+    <string name="decrease_quantity">-</string>
+    <string name="increase_quantity">+</string>
+    <string name="default_quantity">1</string>
+    <string name="price_label">Price:</string>
+    <string name="default_price">$6.99</string>
+    <string name="add_to_order">Add to Order</string>
+    <string name="make_combo">Make it a Combo</string>
+
+    <!-- Order History Layout Strings -->
+    <string name="select_order_label">Select Order:</string>
+    <string name="total_label">Total: $0.00</string>
+    <string name="cancel_order_button">Cancel Order</string>
+
+    <!-- Combo Activity Strings -->
+    <string name="combo_title">Create Your Combo</string>
+    <string name="select_side">Select a Side:</string>
+    <string name="select_drink">Select a Drink:</string>
+    <string name="add_combo_to_order">Add Combo to Order</string>
+    <string name="back_to_burger">Back to Burger</string>
+
+    <!-- Order Layout Strings -->
+    <string name="subtotal_text">Subtotal: $0.00</string>
+    <string name="tax_text">Tax (10%): $0.00</string>
+    <string name="remove_selected">Remove Selected</string>
+    <string name="place_order">Place Order</string>
+
+    <!-- ItemSelectedActivity Strings -->
+    <string name="button_text">Button</string>
+
+    <!-- Existing Beverage resources -->
     <string-array name="beverageNames">
         <item>Cola</item>
         <item>Tea</item>
@@ -66,5 +115,4 @@
         <item>4</item>
         <item>5</item>
     </string-array>
-
 </resources>

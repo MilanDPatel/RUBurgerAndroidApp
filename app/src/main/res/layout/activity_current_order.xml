@@ -26,21 +26,21 @@
             android:id="@+id/subtotalText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Subtotal: $0.00"
+            android:text="@string/subtotal_text"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/taxText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tax (10%): $0.00"
+            android:text="@string/tax_text"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/totalText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total: $0.00"
+            android:text="@string/total_label"
             android:textStyle="bold"
             android:textSize="18sp" />
     </LinearLayout>
@@ -50,13 +50,13 @@
         android:id="@+id/removeSelectedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Remove Selected"
+        android:text="@string/remove_selected"
         android:layout_marginTop="12dp" />
 
     <Button
         android:id="@+id/btnPlaceOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Place Order"
+        android:text="@string/place_order"
         android:layout_marginTop="8dp" />
 </LinearLayout>

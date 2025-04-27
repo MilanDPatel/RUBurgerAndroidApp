@@ -7,7 +7,7 @@
     android:padding="16dp">
 
     <TextView
-        android:text="Select Order:"
+        android:text="@string/select_order_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -26,7 +26,7 @@
         android:id="@+id/textTotal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Total: $0.00"
+        android:text="@string/total_label"
         android:textSize="18sp"
         android:paddingTop="12dp" />
 
@@ -34,7 +34,7 @@
         android:id="@+id/btnCancelOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cancel Order"
+        android:text="@string/cancel_order_button"
         android:layout_marginTop="12dp"
         android:backgroundTint="@android:color/holo_red_light"
         android:textColor="@android:color/white"/>
