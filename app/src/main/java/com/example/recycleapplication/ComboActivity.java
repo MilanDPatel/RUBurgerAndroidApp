@@ -222,7 +222,7 @@ public class ComboActivity extends AppCompatActivity {
         StringBuilder details = new StringBuilder();
         if (isBurger) {
             Burger burger = (Burger) selectedMainItem;
-            details.append("Selected Burger:\n");
+            details.append("Selected Burger(s):\n");
             details.append(burger.getBread().toString()).append(" bun with ");
             details.append(burger.isDoublePatty() ? "double" : "single").append(" patty\n");
 
@@ -238,10 +238,10 @@ public class ComboActivity extends AppCompatActivity {
                 details.append("\n");
             }
             details.append("Quantity: ").append(burger.getQuantity()).append("\n");
-            details.append("Price: ").append(df.format(calculateMainItemPrice())).append("\n");
+            details.append("Price: ").append(df.format(calculateMainItemPrice() * burger.getQuantity())).append("\n");
         } else {
             Sandwich sandwich = (Sandwich) selectedMainItem;
-            details.append("Selected Sandwich:\n");
+            details.append("Selected Sandwich(s):\n");
             details.append(sandwich.getBread().toString()).append(" with ");
             details.append(sandwich.getProtein().toString()).append("\n");
             if (!sandwich.getAddOns().isEmpty()) {
@@ -255,7 +255,7 @@ public class ComboActivity extends AppCompatActivity {
                 details.append("\n");
             }
             details.append("Quantity: ").append(sandwich.getQuantity()).append("\n");
-            details.append("Price: ").append(df.format(calculateMainItemPrice())).append("\n");
+            details.append("Price: ").append(df.format(calculateMainItemPrice() * sandwich.getQuantity())).append("\n");
         }
         tvMainItemDetails.setText(details.toString());
     }

@@ -7,14 +7,20 @@ import android.os.Bundle;
 import android.widget.Button;
 
 /**
- * For demonstration purpose, this class is the Activity to be started when an item on the
- * RecyclerView was clicked
- * Get the name of the item from an intent extra. The text of the button is set to the item name.
- * @author Lily Chang
+ * ItemSelectedActivity class that displays the name of selected item.
+ * @author Aditya Shah
  */
 public class ItemSelectedActivity extends AppCompatActivity {
     private Button btn_itemName;
 
+    /**
+     * Start of the activity.
+     * Sets up the layout and button.
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

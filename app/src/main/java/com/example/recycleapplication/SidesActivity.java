@@ -11,11 +11,14 @@ import com.example.recycleapplication.model.Item; // Import the correct Item cla
 
 import java.util.ArrayList;
 
+/**
+ * SidesActivity class allows users to selects sides from a list of side items.
+ * @author Aditya Shah
+ */
 public class SidesActivity extends AppCompatActivity {
     private static final String TAG = "SidesActivity";
     private ArrayList<Item> sideItems = new ArrayList<>();
 
-    // Make sure these drawable resources exist in your res/drawable folder
     private int[] sideImages = {
             R.drawable.fries,
             R.drawable.chips,
@@ -23,6 +26,13 @@ public class SidesActivity extends AppCompatActivity {
             R.drawable.onionring
     };
 
+    /**
+     * Start of the SidesActivity.
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +66,10 @@ public class SidesActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Sets up th list of side options along with their images, names, and prices.
+     * @return true if set up is successful, false otherwise.
+     */
     private boolean setupSideItems() {
         try {
             String[] sideNames = getResources().getStringArray(R.array.sideNames);
@@ -72,10 +86,8 @@ public class SidesActivity extends AppCompatActivity {
             count = Math.min(count, sidePrices.length);
 
             for (int i = 0; i < count; i++) {
-                // Parse the price string to a double
                 double price = Double.parseDouble(sidePrices[i].replace("$", ""));
 
-                // Create item using the model Item class constructor
                 Item sideItem = new Item(sideNames[i], price);
                 sideItem.setImageResourceId(sideImages[i]);
 

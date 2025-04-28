@@ -1,5 +1,10 @@
 package com.example.recycleapplication.model;
 
+/**
+ * Protein Enum represents protein options for burgers/sandwiches.
+ * Contains information such as price and name.
+ * @author Aditya Shah
+ */
 public enum Protein {
     ROAST_BEEF("Roast beef", 10.99),
     SALMON("Salmon", 9.99),

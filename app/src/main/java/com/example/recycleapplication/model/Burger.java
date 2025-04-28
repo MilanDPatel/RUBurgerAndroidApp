@@ -125,6 +125,7 @@ public class Burger extends Item {
      * and selected add-ons, without price or quantity.
      * @return the burger description
      */
+    @Override
     public String desc() {
         StringBuilder sb = new StringBuilder();
         sb.append(doublePatty ? "Double" : "Single").append(" Burger on ").append(bread);

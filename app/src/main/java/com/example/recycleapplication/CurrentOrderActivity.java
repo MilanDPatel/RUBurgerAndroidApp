@@ -8,6 +8,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.recycleapplication.model.Burger;
@@ -80,20 +81,38 @@ public class CurrentOrderActivity extends AppCompatActivity {
         });
         placeOrderButton.setOnClickListener(v -> {
             if (!currentOrder.getItems().isEmpty()) {
-                Order order = new Order(currentOrder);
-                orderManager.addOrder(order);
-                Toast.makeText(this, "Order has been placed", Toast.LENGTH_SHORT).show();
-                currentOrder.clear();
-                int num = currentOrder.getNumber();
-                currentOrder.setNumber(num + 1);
-                adapter.notifyDataSetChanged();
-                orderListView.clearChoices();
-                updateTotals();
+
+                StringBuilder orderSummary = new StringBuilder();
+                for (Item item : currentOrder.getItems()) {
+                    orderSummary.append("-").append(item.toString()).append("\n");
+                }
+                orderSummary.append("\nTotal: ").append(df.format(currentOrder.getTotal()));
+
+                new AlertDialog.Builder(this)
+                        .setTitle("Confirm Your Order")
+                        .setMessage(orderSummary.toString())
+                        .setPositiveButton("Confirm", (dialog, which) -> {
+                            Order order = new Order(currentOrder);
+                            orderManager.addOrder(order);
+                            Toast.makeText(this, "Order has been placed", Toast.LENGTH_SHORT).show();
+                            currentOrder.clear();
+                            int num = currentOrder.getNumber();
+                            currentOrder.setNumber(num + 1);
+                            adapter.notifyDataSetChanged();
+                            orderListView.clearChoices();
+                            updateTotals();
+                        })
+                        .setNegativeButton("Cancel", (dialog, which) -> {
+                            dialog.dismiss();
+                        })
+                        .show();
             }
         });
     }
 
-    // Updates the subtotal, tax, and total values displayed in the UI
+    /**
+     * Updates the subtotal, tax, and total values displayed in the UI
+     */
     private void updateTotals() {
         double subtotal = 0;
         for (Item item: currentOrder.getItems()) {

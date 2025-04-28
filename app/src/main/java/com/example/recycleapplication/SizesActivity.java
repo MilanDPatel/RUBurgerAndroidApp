@@ -12,6 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.recycleapplication.model.Item;
 import com.example.recycleapplication.model.Order;
 
+/**
+ * SizesActivity class allows the user to pick a size for their side or beverage.
+ * @author Aditya Shah
+ */
 public class SizesActivity extends AppCompatActivity {
     private static final String TAG = "SizesActivity";
 
@@ -26,12 +30,19 @@ public class SizesActivity extends AppCompatActivity {
     private String itemName;
     private int imageResId;
 
+    /**
+     * The start of the SizesActivity.
+     * Sets up listeners for the radio buttons and buttons.
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sizes);
 
-        // Initialize views
         itemNameText = findViewById(R.id.item_name);
         itemImageView = findViewById(R.id.item_image);
         sizeRadioGroup = findViewById(R.id.size_radio_group);
@@ -41,26 +52,22 @@ public class SizesActivity extends AppCompatActivity {
         Button plusButton = findViewById(R.id.plus_button);
         Button addToCartButton = findViewById(R.id.add_to_cart_button);
 
-        // Get data from intent
         itemName = getIntent().getStringExtra("item_name");
         imageResId = getIntent().getIntExtra("image_res_id", 0);
         basePrice = getIntent().getDoubleExtra("base_price", 1.99);
         currentPrice = basePrice;
 
-        // Set initial price
         updateTotalPrice();
 
-        // Get price adjustments from resources
         float mediumAdjustment = Float.parseFloat(getResources().getString(R.string.medium_price_adjustment));
         float largeAdjustment = Float.parseFloat(getResources().getString(R.string.large_price_adjustment));
 
-        // Set initial item name and image
         itemNameText.setText(itemName);
         if (imageResId != 0) {
             itemImageView.setImageResource(imageResId);
         }
 
-        // Set up radio group listener
+
         sizeRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             RadioButton selectedRadioButton = findViewById(checkedId);
             if (selectedRadioButton != null) {
@@ -76,55 +83,54 @@ public class SizesActivity extends AppCompatActivity {
                         currentPrice = basePrice + largeAdjustment;
                         break;
                 }
-                updateTotalPrice(); // Update price when size changes
+                updateTotalPrice();
             }
         });
 
-        // Set up quantity buttons
+
         minusButton.setOnClickListener(v -> {
             if (quantity > 1) {
                 quantity--;
                 quantityText.setText(String.valueOf(quantity));
-                updateTotalPrice(); // Update price when quantity decreases
+                updateTotalPrice();
             }
         });
 
         plusButton.setOnClickListener(v -> {
             quantity++;
             quantityText.setText(String.valueOf(quantity));
-            updateTotalPrice(); // Update price when quantity increases
+            updateTotalPrice();
         });
 
-        // Set up add to cart button
+
         addToCartButton.setOnClickListener(v -> {
             RadioButton selectedRadioButton = findViewById(sizeRadioGroup.getCheckedRadioButtonId());
             String selectedSize = selectedRadioButton != null ? selectedRadioButton.getText().toString() : "Small";
 
-            // Create an Item and add it to the order
+
             Item item = new Item();
             item.setItemName(selectedSize + " " + itemName);
             item.setPrice(currentPrice);
             item.setQuantity(quantity);
             item.setImageResourceId(imageResId);
 
-            // Get the order instance and add the item
             Order currentOrder = Order.getInstance();
 
-            // Add the item quantity times
             currentOrder.addItem(item);
 
 
             String message = "Added to cart: " + quantity + " " + selectedSize + " " + itemName;
             Toast.makeText(SizesActivity.this, message, Toast.LENGTH_SHORT).show();
 
-            // Finish activity to return to previous screen
             finish();
         });
     }
 
-    // Method to update the total price based on quantity and size
+    /**
+     * Computes the total price of the item and updates the total price text field.
+     */
     private void updateTotalPrice() {
         double total = currentPrice * quantity;
-        totalPriceText.setText(String.format("$%.2f", total)); // Update price on UI
+        totalPriceText.setText(String.format("$%.2f", total));
     }
 }

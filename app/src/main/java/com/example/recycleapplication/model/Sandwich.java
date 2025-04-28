@@ -6,6 +6,7 @@ import java.util.ArrayList;
 /**
  * Represents a sandwich item in the restaurant application.
  * Contains information about the bread type, protein choice, add-ons, and quantity.
+ * @author Aditya Shah
  */
 public class Sandwich extends Item {
 
@@ -122,6 +123,12 @@ public class Sandwich extends Item {
         return basePrice * quantity;
     }
 
+    /**
+     * Provides a description of the sandwich, including protein, bread,
+     * and selected add-ons, without price or quantity.
+     * @return the sandwich description.
+     */
+    @Override
     public String desc() {
         StringBuilder description = new StringBuilder();
         description.append(protein.toString()).append(" sandwich on ").append(bread.toString());
@@ -143,7 +150,6 @@ public class Sandwich extends Item {
      *
      * @return A string description of the sandwich
      */
-
     public String getDescription() {
         StringBuilder description = new StringBuilder();
         description.append(protein.toString()).append(" sandwich on ").append(bread.toString());

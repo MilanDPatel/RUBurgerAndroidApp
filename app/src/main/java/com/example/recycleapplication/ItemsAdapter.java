@@ -16,15 +16,32 @@ import com.example.recycleapplication.model.Item;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+/**
+ * ItemsAdapter class to display items in RecyclerView.
+ * @author Aditya Shah
+ */
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> {
     private Context context;
     private ArrayList<Item> items;
 
+    /**
+     * Constructor for ItemsAdapter.
+     * @param context the context of where the adapter is being used.
+     * @param items the items to display.
+     */
     public ItemsAdapter(Context context, ArrayList<Item> items) {
         this.context = context;
         this.items = items;
     }
 
+    /**
+     * Creates the ViewHolder and item layout.
+     * @param parent The ViewGroup into which the new View will be added after it is bound to
+     *               an adapter position.
+     * @param viewType The view type of the new View.
+     *
+     * @return a ViewHolder instance.
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -32,6 +49,12 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
         return new ViewHolder(view);
     }
 
+    /**
+     * Binds data to the ViewHolder.
+     * @param holder The ViewHolder which should be updated to represent the contents of the
+     *        item at the given position in the data set.
+     * @param position The position of the item within the adapter's data set.
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Item item = items.get(position);
@@ -49,21 +72,37 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
         });
     }
 
+    /**
+     * Formats a price into a string.
+     * @param price the price to format.
+     * @return the price as a formatted string.
+     */
     private String formatPrice(double price) {
         DecimalFormat df = new DecimalFormat("$#,##0.00");
         return df.format(price);
     }
 
+    /**
+     * Retrieves the number of items in the list.
+     * @return the number of items.
+     */
     @Override
     public int getItemCount() {
         return items.size();
     }
 
+    /**
+     * ViewHolder class to hold views.
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView itemImage;
         TextView itemName;
         TextView itemPrice;
 
+        /**
+         * Constructor for ViewHolder.
+         * @param itemView the view of the layout.
+         */
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             itemImage = itemView.findViewById(R.id.item_image);
