@@ -1,4 +1,4 @@
-package com.example.recycleapplication;
+package com.example.project5;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,13 +12,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.recycleapplication.model.Bread;
-import com.example.recycleapplication.model.Burger;
-import com.example.recycleapplication.model.Combo;
-import com.example.recycleapplication.model.Item;
-import com.example.recycleapplication.model.Order;
-import com.example.recycleapplication.model.Protein;
-import com.example.recycleapplication.model.Sandwich; // Added import for Sandwich class
+import com.example.project5.model.Burger;
+import com.example.project5.model.Combo;
+import com.example.project5.model.Item;
+import com.example.project5.model.Order;
+import com.example.project5.model.Protein;
+import com.example.project5.model.Sandwich; // Added import for Sandwich class
+import com.example.project5.R;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

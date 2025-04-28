@@ -1,4 +1,4 @@
-package com.example.recycleapplication.model;
+package com.example.project5.model;
 
 /**
  * Protein Enum represents protein options for burgers/sandwiches.

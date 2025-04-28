@@ -1,4 +1,4 @@
-package com.example.recycleapplication;
+package com.example.project5;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.recycleapplication.model.Item;
+import com.example.project5.model.Item;
+import com.example.project5.R;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

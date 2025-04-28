@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.recycleapplication"
+    namespace = "com.example.project5"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.recycleapplication"
+        applicationId = "com.example.project5"
         minSdk = 24
         targetSdk = 35
         versionCode = 1

@@ -1,4 +1,4 @@
-package com.example.recycleapplication;
+package com.example.project5;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -7,7 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.recycleapplication.model.Item; // Import the correct Item class
+import com.example.project5.model.Item; // Import the correct Item class
+import com.example.project5.R;
 
 import java.util.ArrayList;
 

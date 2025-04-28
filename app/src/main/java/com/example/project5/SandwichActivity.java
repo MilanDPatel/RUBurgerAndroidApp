@@ -1,4 +1,4 @@
-package com.example.recycleapplication;
+package com.example.project5;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,15 +15,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.recycleapplication.model.AddOns;
-import com.example.recycleapplication.model.Bread;
-import com.example.recycleapplication.model.Combo;
-import com.example.recycleapplication.model.Order;
-import com.example.recycleapplication.model.Protein;
-import com.example.recycleapplication.model.Sandwich;
+import com.example.project5.model.AddOns;
+import com.example.project5.model.Bread;
+import com.example.project5.model.Combo;
+import com.example.project5.model.Order;
+import com.example.project5.model.Protein;
+import com.example.project5.model.Sandwich;
+import com.example.project5.R;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 
 /**
  * SandwichActivity allows users to customize and add a sandwich to their order.

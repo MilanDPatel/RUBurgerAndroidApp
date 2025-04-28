@@ -1,4 +1,4 @@
-package com.example.recycleapplication;
+package com.example.project5;
 
 import org.junit.Test;
 

@@ -1,5 +1,5 @@
 
-package com.example.recycleapplication;
+package com.example.project5;
 
 /**
  * Represents an item in the application with a name, image, and price.

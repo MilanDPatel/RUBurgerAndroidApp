@@ -1,4 +1,4 @@
-package com.example.recycleapplication;
+package com.example.project5;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -6,6 +6,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.project5.R;
+
 import java.util.ArrayList;
 
 /**
@@ -16,7 +19,7 @@ import java.util.ArrayList;
 
 public class BeveragesActivity extends AppCompatActivity {
     private static final String TAG = "BeveragesActivity";
-    private ArrayList<com.example.recycleapplication.model.Item> beverageItems = new ArrayList<>();
+    private ArrayList<com.example.project5.model.Item> beverageItems = new ArrayList<>();
 
 
     private int[] beverageImages = {
@@ -98,8 +101,8 @@ public class BeveragesActivity extends AppCompatActivity {
             for (int i = 0; i < count; i++) {
                 // Create a beverage Item using your model class
                 double price = Double.parseDouble(beveragePrices[i].replace("$", ""));
-                com.example.recycleapplication.model.Item beverage =
-                        new com.example.recycleapplication.model.Item(beverageNames[i], price);
+                com.example.project5.model.Item beverage =
+                        new com.example.project5.model.Item(beverageNames[i], price);
                 beverage.setImageResourceId(beverageImages[i]);
                 beverageItems.add(beverage);
             }

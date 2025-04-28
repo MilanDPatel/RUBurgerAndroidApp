@@ -1,4 +1,4 @@
-package com.example.recycleapplication.model;
+package com.example.project5.model;
 
 /**
  Enum representing types of bread for burgers and sandwiches.

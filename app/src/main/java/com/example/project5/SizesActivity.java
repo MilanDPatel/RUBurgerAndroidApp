@@ -1,4 +1,4 @@
-package com.example.recycleapplication;
+package com.example.project5;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -9,8 +9,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.recycleapplication.model.Item;
-import com.example.recycleapplication.model.Order;
+import com.example.project5.model.Item;
+import com.example.project5.model.Order;
+import com.example.project5.R;
 
 /**
  * SizesActivity class allows the user to pick a size for their side or beverage.

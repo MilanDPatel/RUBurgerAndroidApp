@@ -1,8 +1,7 @@
-package com.example.recycleapplication;
+package com.example.project5;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -13,9 +12,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.recycleapplication.model.Item;
-import com.example.recycleapplication.model.Order;
-import com.example.recycleapplication.model.OrderManager;
+import com.example.project5.model.Item;
+import com.example.project5.model.Order;
+import com.example.project5.model.OrderManager;
+import com.example.project5.R;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

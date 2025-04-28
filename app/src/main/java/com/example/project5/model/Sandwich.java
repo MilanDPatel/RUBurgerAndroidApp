@@ -1,6 +1,5 @@
-package com.example.recycleapplication.model;
+package com.example.project5.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**

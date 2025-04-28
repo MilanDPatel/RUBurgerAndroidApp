@@ -1,10 +1,12 @@
-package com.example.recycleapplication;
+package com.example.project5;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import com.example.project5.R;
 
 /**
  * ItemSelectedActivity class that displays the name of selected item.
