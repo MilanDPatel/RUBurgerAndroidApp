@@ -26,9 +26,14 @@ import com.example.recycleapplication.model.Protein;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+/**
+ * BurgerActivity allows users to customize and add a burger to their order.
+ * Users can choose bread, patty type, toppings (add-ons), quantity, and make a combo.
+ * Author: Milan Patel
+ */
+
 public class BurgerActivity extends AppCompatActivity {
 
-    // UI Components
     private Spinner spinnerBread;
     private RadioGroup radioGroupPatty;
     private RadioButton radioSinglePatty, radioDoublePatty;
@@ -36,38 +41,41 @@ public class BurgerActivity extends AppCompatActivity {
     private Button btnDecreaseQuantity, btnIncreaseQuantity, btnAddToOrder, btnCombo;
     private TextView tvQuantity, tvPrice;
 
-    // Model objects
     private Burger currentBurger;
     private Combo combo;
     private Order currentOrder;
     private int quantity = 1;
 
-    // Formatter for price display
+
     private final DecimalFormat df = new DecimalFormat("$#,##0.00");
 
+    /**
+     * Called when the activity is starting.
+     * @param savedInstanceState If the activity is being
+     * re-initialized after previously being shut down,
+     * this Bundle contains the data it most recently supplied.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_burger);
 
-        // Initialize order if not passed in
+
         currentOrder = Order.getInstance();
 
-        // Initialize UI components
         initializeComponents();
 
-        // Setup listeners for user interactions
         setupListeners();
 
-        // Initialize burger defaults
         resetBurger();
     }
 
+    /**
+     * Initializes UI components and adapters (like setting up the bread spinner).
+     */
     private void initializeComponents() {
-        // Bread spinner with filtered options
         spinnerBread = findViewById(R.id.spinnerBread);
 
-        // Create a filtered list with only the three breads for burgers
         ArrayList<Bread> burgerBreads = new ArrayList<>();
         burgerBreads.add(Bread.BRIOCHE);
         burgerBreads.add(Bread.WHEAT);
@@ -78,32 +86,28 @@ public class BurgerActivity extends AppCompatActivity {
         breadAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerBread.setAdapter(breadAdapter);
 
-        // Rest of your initialization code remains the same
-        // Patty radio group
         radioGroupPatty = findViewById(R.id.radioGroupPatty);
         radioSinglePatty = findViewById(R.id.radioSinglePatty);
         radioDoublePatty = findViewById(R.id.radioDoublePatty);
 
-        // Add-ons checkboxes
         checkLettuce = findViewById(R.id.checkLettuce);
         checkTomatoes = findViewById(R.id.checkTomatoes);
         checkOnions = findViewById(R.id.checkOnions);
         checkAvocado = findViewById(R.id.checkAvocado);
         checkCheese = findViewById(R.id.checkCheese);
 
-        // Quantity controls
         btnDecreaseQuantity = findViewById(R.id.btnDecreaseQuantity);
         tvQuantity = findViewById(R.id.tvQuantity);
         btnIncreaseQuantity = findViewById(R.id.btnIncreaseQuantity);
-
-        // Price display
         tvPrice = findViewById(R.id.tvPrice);
 
-        // Action buttons
         btnAddToOrder = findViewById(R.id.btnAddToOrder);
         btnCombo = findViewById(R.id.btnCombo);
     }
 
+    /**
+     * Setup event listeners for user interaction.
+     */
     private void setupListeners() {
         // Bread selection listener
         spinnerBread.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -114,17 +118,13 @@ public class BurgerActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // Do nothing
             }
         });
 
-        // Patty selection listener
         radioGroupPatty.setOnCheckedChangeListener((group, checkedId) -> updatePrice());
 
-        // Add-ons listeners
         setupCheckBoxListeners();
 
-        // Quantity control listeners
         btnDecreaseQuantity.setOnClickListener(v -> {
             if (quantity > 1) {
                 quantity--;
@@ -141,11 +141,13 @@ public class BurgerActivity extends AppCompatActivity {
             }
         });
 
-        // Action button listeners
         btnAddToOrder.setOnClickListener(v -> addToOrder());
         btnCombo.setOnClickListener(v -> showComboOptions());
     }
 
+    /**
+     * Setup change listeners for all topping checkboxes to trigger price updates.
+     */
     private void setupCheckBoxListeners() {
         CheckBox[] checkBoxes = {checkLettuce, checkTomatoes, checkOnions, checkAvocado, checkCheese};
         for (CheckBox checkBox : checkBoxes) {
@@ -153,17 +155,22 @@ public class BurgerActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Updates the displayed price based on current selections and quantity.
+     */
     private void updatePrice() {
         updateCurrentBurger();
         double totalPrice = getBurgerPrice() * quantity;
         tvPrice.setText(df.format(totalPrice));
     }
 
+    /**
+     * Updates the Burger object based on the current UI state.
+     */
     private void updateCurrentBurger() {
         currentBurger.setBread((Bread) spinnerBread.getSelectedItem());
         currentBurger.setDoublePatty(radioDoublePatty.isChecked());
 
-        // Clear and update add-ons
         currentBurger.getAddOns().clear();
         if (checkLettuce.isChecked()) currentBurger.getAddOns().add(AddOns.LETTUCE);
         if (checkTomatoes.isChecked()) currentBurger.getAddOns().add(AddOns.TOMATOES);
@@ -175,6 +182,10 @@ public class BurgerActivity extends AppCompatActivity {
         currentBurger.setProtein(Protein.BEEF_PATTY);
     }
 
+    /**
+     * Calculates the base price of the burger with selected add-ons and patty type.
+     * @return total price of one burger
+     */
     private double getBurgerPrice() {
         double basePrice = 6.99;
         if (currentBurger.isDoublePatty()) {
@@ -186,6 +197,9 @@ public class BurgerActivity extends AppCompatActivity {
         return basePrice;
     }
 
+    /**
+     * Resets the UI and current burger to default settings.
+     */
     private void resetBurger() {
         currentBurger = new Burger();
         currentBurger.setProtein(Protein.BEEF_PATTY);
@@ -196,8 +210,7 @@ public class BurgerActivity extends AppCompatActivity {
         combo = null;
         quantity = 1;
 
-        // Reset UI components
-        spinnerBread.setSelection(0); // Brioche
+        spinnerBread.setSelection(0);
         radioSinglePatty.setChecked(true);
         checkLettuce.setChecked(false);
         checkTomatoes.setChecked(false);
@@ -209,6 +222,9 @@ public class BurgerActivity extends AppCompatActivity {
         updatePrice();
     }
 
+    /**
+     * Adds the current burger to the order and resets the burger for a new customization.
+     */
     private void addToOrder() {
         updateCurrentBurger();
         currentOrder.addItem(currentBurger);
@@ -217,6 +233,9 @@ public class BurgerActivity extends AppCompatActivity {
         resetBurger();
     }
 
+    /**
+     * Launches ComboActivity to allow user to add sides and drinks to their burger.
+     */
     private void showComboOptions() {
         updateCurrentBurger();
 
@@ -225,7 +244,9 @@ public class BurgerActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // Method to handle returning from the combo activity
+    /**
+     * Handles result when coming back from ComboActivity.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

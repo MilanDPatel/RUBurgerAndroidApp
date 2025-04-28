@@ -20,6 +20,12 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * CurrentOrderActivity allows users to add their items to the cart.
+ * Users can remove items or order them.
+ * Author: Milan Patel
+ */
+
 public class CurrentOrderActivity extends AppCompatActivity {
     private ListView orderListView;
     private Button removeSelectedButton, placeOrderButton;
@@ -32,6 +38,10 @@ public class CurrentOrderActivity extends AppCompatActivity {
     private final double TAX_RATE = 0.06625;
     private final DecimalFormat df = new DecimalFormat("$#,##0.00");
 
+    /**
+     * Initializes the activity, sets up the UI elements, and handles the logic for creating the order.
+     * @param savedInstanceState The saved instance state, containing data on the previous activity state if available.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +49,6 @@ public class CurrentOrderActivity extends AppCompatActivity {
 
         currentOrder = Order.getInstance();
         orderManager = OrderManager.getInstance();
-
-
 
         orderListView = findViewById(R.id.orderListView);
         removeSelectedButton = findViewById(R.id.removeSelectedButton);
@@ -54,17 +62,13 @@ public class CurrentOrderActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_single_choice,
                 currentOrder.getItems());
 
-
-
         Log.d("AdapterDebug", "Adapter count: " + adapter.getCount());
         for (int i = 0; i < adapter.getCount(); i++) {
             Log.d("AdapterDebug", "Item at " + i + ": " + adapter.getItem(i));
         }
-
         orderListView.setAdapter(adapter);
 
         updateTotals();
-
         removeSelectedButton.setOnClickListener(v -> {
             int pos = orderListView.getCheckedItemPosition();
             if (pos != ListView.INVALID_POSITION) {
@@ -73,9 +77,7 @@ public class CurrentOrderActivity extends AppCompatActivity {
                 orderListView.clearChoices();
                 updateTotals();
             }
-
         });
-
         placeOrderButton.setOnClickListener(v -> {
             if (!currentOrder.getItems().isEmpty()) {
                 Order order = new Order(currentOrder);
@@ -91,7 +93,7 @@ public class CurrentOrderActivity extends AppCompatActivity {
         });
     }
 
-
+    // Updates the subtotal, tax, and total values displayed in the UI
     private void updateTotals() {
         double subtotal = 0;
         for (Item item: currentOrder.getItems()) {

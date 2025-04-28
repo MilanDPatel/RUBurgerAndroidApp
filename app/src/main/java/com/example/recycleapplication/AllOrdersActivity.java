@@ -21,6 +21,12 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Activity to display and manage all orders.
+ * Allows users to view details of existing orders and cancel orders if desired.
+ * Author: Milan Patel
+ */
+
 public class AllOrdersActivity extends AppCompatActivity {
     private Spinner spinnerOrders;
     private ListView listViewItems;
@@ -32,6 +38,11 @@ public class AllOrdersActivity extends AppCompatActivity {
     private List<Order> orders;
     private final DecimalFormat df = new DecimalFormat("$#,##0.00");
 
+    /**
+     * Called when the activity is first created.
+     * @param savedInstanceState If the activity is being re-initialized after
+     * previously being shut down, this Bundle contains the data it most recently supplied.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,6 +116,10 @@ public class AllOrdersActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Updates the displayed details based on the selected order number.
+     * @param number the order number to display
+     */
     public void updateDetails(int number) {
         Order selectedOrder = orderManager.getOrder(number);
         if (selectedOrder == null) {

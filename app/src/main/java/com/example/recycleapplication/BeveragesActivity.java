@@ -6,15 +6,19 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
+
+/**
+ * Activity that displays a list of beverage items in a RecyclerView.
+ * Loads beverage names, prices, and images from resources and displays them.
+ * Author: Milan Patel
+ */
 
 public class BeveragesActivity extends AppCompatActivity {
     private static final String TAG = "BeveragesActivity";
     private ArrayList<com.example.recycleapplication.model.Item> beverageItems = new ArrayList<>();
 
 
-    // Images for beverage items
     private int[] beverageImages = {
             R.drawable.cola,
             R.drawable.tea,
@@ -33,11 +37,15 @@ public class BeveragesActivity extends AppCompatActivity {
             R.drawable.chocolate
     };
 
+    /**
+     * Called when the activity is starting.
+     * @param savedInstanceState If the activity is being
+     * re-initialized after previously being shut down,
+     * this Bundle contains the data it most recently supplied.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
 
         try {
             setContentView(R.layout.activity_beverages);
@@ -68,6 +76,10 @@ public class BeveragesActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Sets up the list of beverage items by loading names, prices, and images.
+     * @return true if items were successfully set up; false otherwise.
+     */
     private boolean setupBeverageItems() {
         try {
             String[] beverageNames = getResources().getStringArray(R.array.beverageNames);
