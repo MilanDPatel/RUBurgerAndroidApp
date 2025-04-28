@@ -265,11 +265,11 @@ public class ComboActivity extends AppCompatActivity {
      */
     private void updateComboPrice() {
         double mainItemPrice = calculateMainItemPrice();
-        double comboPrice = mainItemPrice + COMBO_ADDON_PRICE;
+        double comboPrice = mainItemPrice * selectedMainItem.getQuantity() + COMBO_ADDON_PRICE * selectedMainItem.getQuantity();
 
         // Update price display
-        String priceText = (isBurger ? "Burger" : "Sandwich") + " Price: " + df.format(mainItemPrice) + "\n" +
-                "Combo Addition: " + df.format(COMBO_ADDON_PRICE) + "\n" +
+        String priceText = (isBurger ? "Burger" : "Sandwich") + " Price: " + df.format(mainItemPrice * selectedMainItem.getQuantity()) + "\n" +
+                "Combo Addition: " + df.format(COMBO_ADDON_PRICE * selectedMainItem.getQuantity()) + "\n" +
                 "Total Combo Price: " + df.format(comboPrice);
 
         tvComboPrice.setText(priceText);
