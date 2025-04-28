@@ -122,6 +122,22 @@ public class Sandwich extends Item {
         return basePrice * quantity;
     }
 
+    public String desc() {
+        StringBuilder description = new StringBuilder();
+        description.append(protein.toString()).append(" sandwich on ").append(bread.toString());
+
+        if (!addOns.isEmpty()) {
+            description.append(" with ");
+            for (int i = 0; i < addOns.size(); i++) {
+                description.append(addOns.get(i).toString());
+                if (i < addOns.size() - 1) {
+                    description.append(", ");
+                }
+            }
+        }
+        return description.toString();
+    }
+
     /**
      * Creates a description of the sandwich.
      *
@@ -142,10 +158,10 @@ public class Sandwich extends Item {
             }
         }
 
-        if (quantity > 1) {
-            description.append(" (x").append(quantity).append(")");
-        }
+        description.append(" (").append(quantity).append(")");
 
+
+        description.append("- $" ).append(String.format("%.2f", getPrice()));
         return description.toString();
     }
 

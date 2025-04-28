@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -79,6 +80,7 @@ public class CurrentOrderActivity extends AppCompatActivity {
             if (!currentOrder.getItems().isEmpty()) {
                 Order order = new Order(currentOrder);
                 orderManager.addOrder(order);
+                Toast.makeText(this, "Order has been placed", Toast.LENGTH_SHORT).show();
                 currentOrder.clear();
                 int num = currentOrder.getNumber();
                 currentOrder.setNumber(num + 1);

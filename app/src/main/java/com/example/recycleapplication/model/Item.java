@@ -56,6 +56,10 @@ public class Item implements Serializable {
         return df.format(getPrice());
     }
 
+    public String desc() {
+        return null;
+    }
+
     @Override
     public String toString() {
         return itemName + " - " + getFormattedPrice() + " (" + quantity + ")";

@@ -325,7 +325,7 @@ public class ComboActivity extends AppCompatActivity {
             return;
         }
 
-        String name = "Combo " + selectedMainItem.toString() + " " + selectedSide.getItemName() + " " + selectedDrink.getItemName();
+        String name = "Combo " + selectedMainItem.desc() + " " + selectedSide.getItemName() + " " + selectedDrink.getItemName();
         comboItem.setItemName(name);
         comboItem.setPrice(finalPrice);
         comboItem.setQuantity(1);

@@ -8,7 +8,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.recycleapplication.model.Item;
@@ -68,18 +70,32 @@ public class AllOrdersActivity extends AppCompatActivity {
         btnCancelOrder.setOnClickListener(v -> {
             int position = spinnerOrders.getSelectedItemPosition();
             Integer selectedNum = orderNumberAdapter.getItem(position);
+
             if (selectedNum != null) {
-                Order order = orderManager.getOrder(selectedNum);
-                orderManager.removeOrder(order);
-                orders.remove(order);
-                orderNumberAdapter.remove(selectedNum);
-                itemAdapter.clear();
-                if (!orders.isEmpty()) {
-                    updateDetails(orderNumberAdapter.getItem(0));
-                } else {
-                    itemAdapter.clear();
-                    textTotal.setText("");
-                }
+                new AlertDialog.Builder(this)
+                        .setTitle("Cancel Order")
+                        .setMessage("Are you sure you want to cancel this order?")
+                        .setPositiveButton("Yes", (dialog, which) -> {
+                            Order order = orderManager.getOrder(selectedNum);
+                            orderManager.removeOrder(order);
+                            orders.remove(order);
+                            orderNumberAdapter.remove(selectedNum);
+                            Toast.makeText(this, "Order " + selectedNum + " canceled", Toast.LENGTH_SHORT).show();
+                            itemAdapter.clear();
+                            if (!orders.isEmpty()) {
+                                updateDetails(orderNumberAdapter.getItem(0));
+                            } else {
+                                itemAdapter.clear();
+                                textTotal.setText("");
+                            }
+                        })
+                        .setNegativeButton("No", (dialog, which) -> {
+                            dialog.dismiss();
+                        })
+                        .show();
+            }
+            else {
+                Toast.makeText(this, "No order selected to cancel", Toast.LENGTH_SHORT).show();
             }
         });
 

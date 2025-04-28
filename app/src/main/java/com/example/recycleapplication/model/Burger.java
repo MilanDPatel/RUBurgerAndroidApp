@@ -68,6 +68,22 @@ public class Burger extends Item {
         return quantity * burgerPrice;
     }
 
+    public String desc() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(doublePatty ? "Double" : "Single").append(" Burger on ").append(bread);
+
+
+        if (!addOns.isEmpty()) {
+            sb.append(" with ");
+            StringJoiner joiner = new StringJoiner(", ");
+            for (AddOns addOn : addOns) {
+                joiner.add(addOn.toString());
+            }
+            sb.append(joiner);
+        }
+        return sb.toString();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
