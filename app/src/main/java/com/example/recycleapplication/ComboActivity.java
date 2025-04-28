@@ -283,7 +283,7 @@ public class ComboActivity extends AppCompatActivity {
             for (int i = 0; i < burger.getAddOns().size(); i++) {
                 basePrice += burger.getAddOns().get(i).getPrice();
             }
-            return basePrice * burger.getQuantity();
+            return basePrice;
         } else {
             // For sandwich, use the item price from the Sandwich object
             Sandwich sandwich = (Sandwich) selectedMainItem;
@@ -306,7 +306,7 @@ public class ComboActivity extends AppCompatActivity {
                 basePrice += sandwich.getAddOns().get(i).getPrice();
             }
 
-            return basePrice * sandwich.getQuantity();
+            return basePrice;
         }
     }
 
@@ -328,7 +328,7 @@ public class ComboActivity extends AppCompatActivity {
         String name = "Combo " + selectedMainItem.desc() + " " + selectedSide.getItemName() + " " + selectedDrink.getItemName();
         comboItem.setItemName(name);
         comboItem.setPrice(finalPrice);
-        comboItem.setQuantity(1);
+        comboItem.setQuantity(selectedMainItem.getQuantity());
 
         // Add the combo item to the order
         currentOrder.addItem(comboItem);
